@@ -57,6 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\CameraStatusEnum.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
