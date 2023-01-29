@@ -34,8 +34,8 @@ public class CameraController : MonoBehaviour
                 newPosition = new Vector3(0, 0, -10);
                 break;
             case CameraStatusEnum.Outdoor:
-                newPosition = new Vector3(player.transform.position.x,
-                                          player.transform.position.y,
+                newPosition = new Vector3(Mathf.Clamp(player.transform.position.x, -16, 16),
+                                          Mathf.Clamp(player.transform.position.y, -20, 20),
                                           -10);
                 break;
         }
