@@ -65,6 +65,13 @@
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
     <Compile Include="Assets\Scripts\Maps\ProceduralMapGenerator.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\CharactersEnum.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Constants\DialogsConstants.cs" />
+    <Compile Include="Assets\Scripts\Interface\IController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
+    <Compile Include="Assets\Scripts\Interface\IControllerManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

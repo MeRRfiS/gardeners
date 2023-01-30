@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IController
 {
     private Vector2 moveDir;
 
@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour
     [Header("Player Status")]
     [SerializeField] private float speed = 10f;
 
-    private void Start()
+    public LoadStatusEnum Status { get; private set; }
+
+    public void StartUp()
     {
-        
+        Status = LoadStatusEnum.IsLoaded;
     }
 
     private void Update()
