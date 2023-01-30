@@ -9,6 +9,7 @@ public class ControllerLobbiManager : MonoBehaviour, IControllerManager
     [SerializeField] private CameraController cameraController;
     [SerializeField] private TextController textController;
     [SerializeField] private SaveController saveController;
+    [SerializeField] private DialogueController dialogueController;
 
     private List<IController> controllers = new List<IController>();
 
@@ -17,6 +18,7 @@ public class ControllerLobbiManager : MonoBehaviour, IControllerManager
         controllers.Add(saveController);
         controllers.Add(textController);
         controllers.Add(playerController);
+        controllers.Add(dialogueController);
         controllers.Add(cameraController);
 
         StartCoroutine(LoadControllers());

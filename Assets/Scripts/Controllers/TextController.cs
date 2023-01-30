@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using TMPro;
+using System.Collections;
+using UnityEngine.UI;
 
 public class TextController : MonoBehaviour, IController
 {
@@ -10,13 +13,6 @@ public class TextController : MonoBehaviour, IController
     public static UIText uiText = new UIText();
     public static Dialogs dial = new Dialogs();
     public static Answers ans = new Answers();
-
-    [Header("Components")]
-    [SerializeField] private GameObject dialogObj;
-
-    [Header("Dialog's components")]
-    [SerializeField] private GameObject dialogContent;
-    [SerializeField] private GameObject answerContent;
 
     public LoadStatusEnum Status { get; private set; }
 
@@ -87,6 +83,9 @@ public class Dialogs
 
     public Dictionary<string, string[]> ErnestDialog = new Dictionary<string, string[]>();
 
+    public Dictionary<CharactersEnum, Dictionary<string, string[]>> CharDialogs = 
+        new Dictionary<CharactersEnum, Dictionary<string, string[]>>();
+
     public Dialogs()
     {
         ErnestDialog.Add("ErnestDialog_0_0_0", ErnestDialog_0_0_0);
@@ -98,6 +97,8 @@ public class Dialogs
         ErnestDialog.Add("ErnestDialog_0_2_0", ErnestDialog_0_2_0);
         ErnestDialog.Add("ErnestDialog_0_2_1", ErnestDialog_0_2_1);
         ErnestDialog.Add("ErnestDialog_0_2_2", ErnestDialog_0_2_2);
+
+        CharDialogs.Add(CharactersEnum.Ernest, ErnestDialog);
     }
 }
 public class Answers
@@ -110,10 +111,15 @@ public class Answers
 
     public Dictionary<string, string[]> AnswerToErnest = new Dictionary<string, string[]>();
 
+    public Dictionary<CharactersEnum, Dictionary<string, string[]>> CharAnswer =
+        new Dictionary<CharactersEnum, Dictionary<string, string[]>>();
+
     public Answers()
     {
         AnswerToErnest.Add("AnswerToErnest_0_0", AnswerToErnest_0_0);
         AnswerToErnest.Add("AnswerToErnest_0_1", AnswerToErnest_0_1);
         AnswerToErnest.Add("AnswerToErnest_0_2", AnswerToErnest_0_2);
+
+        CharAnswer.Add(CharactersEnum.Ernest, AnswerToErnest);
     }
 }

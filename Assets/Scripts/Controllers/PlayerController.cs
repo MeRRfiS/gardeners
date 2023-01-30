@@ -12,6 +12,13 @@ public class PlayerController : MonoBehaviour, IController
     [Header("Player Status")]
     [SerializeField] private float speed = 10f;
 
+    private bool _isCanMove = true;
+
+    public bool IsCanMove
+    {
+        get { return _isCanMove; }
+        set { _isCanMove = value; }
+    }
     public LoadStatusEnum Status { get; private set; }
 
     public void StartUp()
@@ -21,8 +28,11 @@ public class PlayerController : MonoBehaviour, IController
 
     private void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveDir = moveInput.normalized * speed;
+        if (_isCanMove)
+        {
+            Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            moveDir = moveInput.normalized * speed;
+        }
     }
 
     private void FixedUpdate()

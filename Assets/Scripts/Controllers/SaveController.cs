@@ -62,4 +62,15 @@ public class SaveController : MonoBehaviour, IController
 public class Save
 {
     public int IndexErnestDialog = 0;
+    public int SubIndexErnestDialog = 0;
+
+    public Dictionary<CharactersEnum, int> IndexDialog = new Dictionary<CharactersEnum, int>();
+    public Dictionary<CharactersEnum, int> SubIndexDialog = new Dictionary<CharactersEnum, int>();
+
+    public Save()
+    {
+        IndexDialog.Add(CharactersEnum.Ernest, IndexErnestDialog);
+
+        SubIndexDialog.Add(CharactersEnum.Ernest, SubIndexErnestDialog);
+    }
 }

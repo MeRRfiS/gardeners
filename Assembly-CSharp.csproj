@@ -8,9 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{C1C01879-194F-CD1A-BBF0-F17D844C9112}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{2A1B3620-4FBE-53C1-A49E-B5E199FAB9AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -72,6 +71,10 @@
     <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
     <Compile Include="Assets\Scripts\Interface\IControllerManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
+    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\QuitGameOnKeypress.cs" />
+    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
+    <Compile Include="Assets\Scripts\Controllers\DialogueController.cs" />
+    <Compile Include="Assets\Scripts\Text\ChoiceIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -873,6 +876,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Ink-Libraries.csproj">
+      <Project>{66851969-5AF5-B9DA-80CA-2624A8C5D294}</Project>
+      <Name>Ink-Libraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="InkEditor.csproj">
+      <Project>{F0162717-ECBC-4E62-6AD5-5CB1A52AFADB}</Project>
+      <Name>InkEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
