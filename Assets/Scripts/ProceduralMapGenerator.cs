@@ -19,6 +19,7 @@ public class ProceduralMapGenerator : MonoBehaviour
     {
         GenerateMap();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
