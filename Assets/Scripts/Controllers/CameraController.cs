@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IController
 {
     [Header("Components")]
     [SerializeField] private GameObject camera;
@@ -11,6 +11,13 @@ public class CameraController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float offsetSmoothing = 1f;
     private CameraStatusEnum status = CameraStatusEnum.InHouse;
+
+    public LoadStatusEnum Status { get; private set; }
+
+    public void StartUp()
+    {
+        Status = LoadStatusEnum.IsLoaded;
+    }
 
     public void ChangeCameraStatus()
     {
