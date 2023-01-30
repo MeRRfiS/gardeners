@@ -57,10 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Enums\CameraStatusEnum.cs" />
-    <Compile Include="Assets\Scripts\Text\Dialog.cs" />
+    <Compile Include="Assets\Scripts\ProceduralMapGenerator.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\Text\Dialog.cs" />
     <Compile Include="Assets\Scripts\Controllers\TextController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
     <Compile Include="Assets\Scripts\Maps\ProceduralMapGenerator.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
     <Compile Include="Assets\Scripts\Controllers\DialogueController.cs" />
     <Compile Include="Assets\Scripts\Text\ChoiceIndex.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\CameraStatusEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
