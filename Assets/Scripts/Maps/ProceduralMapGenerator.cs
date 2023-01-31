@@ -10,8 +10,9 @@ public class ProceduralMapGenerator : MonoBehaviour
     [SerializeField] private Tilemap wallMap;
 
     [Header("Tiles")]
-    [SerializeField] private Tile wall;
-    [SerializeField] private Tile floor;
+    [SerializeField] private RuleTile wall;
+    [SerializeField] private RuleTile floor;
+    [SerializeField] private Tile shadowFloor;
 
     [Header("Settings")]
     [SerializeField] private int width = 200;
@@ -42,7 +43,8 @@ public class ProceduralMapGenerator : MonoBehaviour
         {
             for (int fory = 0; fory < height; fory++)
             {
-                wallMap.SetTile(new Vector3Int(forx+offsetX, fory+offsetY), wall);
+                floorMap.SetTile(new Vector3Int(forx + offsetX, fory + offsetY), shadowFloor);
+                wallMap.SetTile(new Vector3Int(forx + offsetX, fory + offsetY), wall);
             }
         }
         for (int path = 0; path < pathes; path++)

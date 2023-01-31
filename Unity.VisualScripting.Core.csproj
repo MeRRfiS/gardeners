@@ -316,9 +316,9 @@
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Reflection\Operators\OperatorException.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\EditorBinding\EditorBindingUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Collections\GuidCollection.cs" />
-    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\EditorBinding\TypeSetAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Reflection\Optimization\StaticFunctionInvoker_5.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Profiling\ProfilingScope.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\EditorBinding\TypeSetAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Collections\NoAllocEnumerator.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Reflection\ConversionUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Core\Reflection\Operators\ModuloHandler.cs" />
@@ -780,6 +780,12 @@
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\DOTween\Editor\DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.11f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>

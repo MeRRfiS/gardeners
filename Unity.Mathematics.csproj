@@ -77,8 +77,8 @@
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\math.cs" />
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\double2.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\bool3x4.gen.cs" />
-    <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\uint2.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\int2x3.gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\uint2.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\Geometry\Plane.cs" />
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\bool4x4.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.mathematics@1.2.6\Unity.Mathematics\double3.gen.cs" />
@@ -443,6 +443,12 @@
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\DOTween\Editor\DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.11f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
