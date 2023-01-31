@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IController
 {
+    private static PlayerController instance;
+
     private Vector2 moveDir;
 
     [Header("Components")]
@@ -16,14 +18,20 @@ public class PlayerController : MonoBehaviour, IController
 
     public bool IsCanMove
     {
-        get { return _isCanMove; }
         set { _isCanMove = value; }
     }
     public LoadStatusEnum Status { get; private set; }
 
     public void StartUp()
     {
+        instance = this;
+
         Status = LoadStatusEnum.IsLoaded;
+    }
+
+    public static PlayerController GetInstance()
+    {
+        return instance;
     }
 
     private void Update()

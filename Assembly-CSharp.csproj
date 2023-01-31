@@ -56,27 +56,29 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\ProceduralMapGenerator.cs" />
-    <Compile Include="Assets\Scripts\Objects Scripts\Door.cs" />
-    <Compile Include="Assets\Scripts\Text\Dialog.cs" />
-    <Compile Include="Assets\Scripts\Controllers\TextController.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
-    <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
-    <Compile Include="Assets\Scripts\Maps\ProceduralMapGenerator.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Enums\CharactersEnum.cs" />
-    <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Constants\DialogsConstants.cs" />
-    <Compile Include="Assets\Scripts\Interface\IController.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
     <Compile Include="Assets\Scripts\Interface\IControllerManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
-    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\QuitGameOnKeypress.cs" />
-    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
     <Compile Include="Assets\Scripts\Controllers\DialogueController.cs" />
-    <Compile Include="Assets\Scripts\Text\ChoiceIndex.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\CameraStatusEnum.cs" />
+    <Compile Include="Assets\Scripts\Maps\ProceduralMapGenerator.cs" />
+    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
+    <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\QuitGameOnKeypress.cs" />
+    <Compile Include="Assets\Scripts\Text\Dialog.cs" />
+    <Compile Include="Assets\Scripts\Interface\IController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\CharactersEnum.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Constants\DialogsConstants.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\Controllers\TextController.cs" />
+    <Compile Include="Assets\Scripts\Text\ChoiceIndex.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\InventarController.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Stuctures\ItemsStruct.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\ItemsTypeEnum.cs" />
+    <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
