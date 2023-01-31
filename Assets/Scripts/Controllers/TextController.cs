@@ -59,5 +59,6 @@ public class UIText
 }
 public class Items
 {
+    public string[] ItemName = new string[1];
     public string[] ItemDis = new string[2];
 }

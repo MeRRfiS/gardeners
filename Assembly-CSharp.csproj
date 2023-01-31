@@ -79,6 +79,9 @@
     <Compile Include="Assets\Scripts\Function Scripts\Stuctures\ItemsStruct.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\ItemsTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
+    <Compile Include="Assets\Scripts\Text\DialogueVariables.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Constants\GlobalVariablesConstants.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\ItemIds.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

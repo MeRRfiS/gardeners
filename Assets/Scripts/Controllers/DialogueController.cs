@@ -12,9 +12,15 @@ public class DialogueController : MonoBehaviour, IController
     private static DialogueController instance;
     private PlayerController playerController;
 
+    private DialogueVariables dialogueVariables;
+
+    [Header("Load Globals JSON")]
+    [SerializeField] private TextAsset loadGlobalJSON;
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueTextDisplay;
+    [SerializeField] private Image icon;
 
     private Story currentStory;
 
@@ -26,6 +32,8 @@ public class DialogueController : MonoBehaviour, IController
     public bool dialogueIsPlaying { get; private set; }
 
     public int choiceIndex { private get; set; }
+
+    private CharactersEnum character;
 
     private TextMeshProUGUI[] choicesText;
 
@@ -39,6 +47,8 @@ public class DialogueController : MonoBehaviour, IController
         }
         instance = this;
 
+        dialogueVariables = new DialogueVariables(loadGlobalJSON);
+
         Status = LoadStatusEnum.IsLoaded;
     }
 
@@ -47,32 +57,55 @@ public class DialogueController : MonoBehaviour, IController
         return instance;
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
+    private void SetCharacterIcon()
     {
-        currentStory = new Story(inkJSON.text);
+        int index = ((IntValue)GetVariableState(GlobalVariablesConstants.CHARACTER_INDEX)).value;
+        icon.sprite = Resources.Load<Sprite>($"CharacterIcon/{index}");
+    }
+
+    public void EnterDialogueMode(CharactersEnum ch)
+    {
+        var json = (Resources.Load($"Dialogue/{ch.ToString()}")) as TextAsset;
+        SetCharacterIcon();
+        currentStory = new Story(json.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        dialogueVariables.StartListening(currentStory);
 
         ContinueStory();
     }
 
     private void ExitDialogueMode()
     {
+        dialogueVariables.StopListening(currentStory);
+
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueTextDisplay.text = "";
-        playerController.IsCanMove = true;
+
+        PlayerController.GetInstance().IsCanMove = true;
     }
 
     private void ContinueStory()
     {
         if (currentStory.canContinue)
         {
+            SetCharacterIcon();
             dialogueTextDisplay.text = currentStory.Continue();
             DisplayChoices();
         }
         else
         {
+            if (((Ink.Runtime.IntValue)GetVariableState(GlobalVariablesConstants.GET_KVZHP)).value == 1)
+            {
+                var item = new ItemsStruct((int)ItemIds.KVZHP,
+                                           TextController.items.ItemName[(int)ItemIds.KVZHP],
+                                           ItemsTypeEnum.Tool);
+                InventarController.GetInstance().AddNewItemTool(item);
+                SetVariableState(GlobalVariablesConstants.GET_KVZHP, new IntValue(2));
+            }
+
             ExitDialogueMode();
         }
     }
@@ -140,6 +173,31 @@ public class DialogueController : MonoBehaviour, IController
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ContinueStory();
+        }
+    }
+
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if(variableValue == null)
+        {
+            Debug.LogWarning("Ink variable was found to be null: " + variableName);
+        }
+
+        return variableValue;
+    }
+
+    public void SetVariableState(string variableName, Ink.Runtime.Object variableValue)
+    {
+        dialogueVariables.VariableChanged(variableName, variableValue);
+    }
+
+    public void OnApplicationQuit()
+    {
+        if(dialogueVariables != null)
+        {
+            dialogueVariables.SaveVariables();
         }
     }
 

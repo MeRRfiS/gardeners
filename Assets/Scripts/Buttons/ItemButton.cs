@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemButton : MonoBehaviour
 {
-    public int _index;
+    private int _index;
 
     public int ItemIndex 
     { 

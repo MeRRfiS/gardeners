@@ -2,5 +2,5 @@
 {
     Material = 1,
     Weapon = 2,
-    Bonus = 3
+    Tool = 3
 }

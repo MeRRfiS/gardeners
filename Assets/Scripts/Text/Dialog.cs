@@ -10,9 +10,6 @@ public class Dialog : MonoBehaviour
     private TextController textController;
     private PlayerController playerController;
 
-    [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
-
     [SerializeField] private CharactersEnum character;
 
     private void Start()
@@ -31,8 +28,24 @@ public class Dialog : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E) && !DialogueController.GetInstance().dialogueIsPlaying)
         {
+            switch (character)
+            {
+                case CharactersEnum.Ernest:
+                    if (((Ink.Runtime.IntValue)DialogueController
+                        .GetInstance()
+                        .GetVariableState(GlobalVariablesConstants.ERNEST_DIALOG_INDEX)).value != 2)
+                    {
+                        DialogueController
+                            .GetInstance()
+                            .SetVariableState(GlobalVariablesConstants.ERNEST_DIALOG_INDEX, new Ink.Runtime.IntValue(1));
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
             playerController.IsCanMove = false;
-            DialogueController.GetInstance().EnterDialogueMode(inkJSON);
+            DialogueController.GetInstance().EnterDialogueMode(character);
         }
     }
 
