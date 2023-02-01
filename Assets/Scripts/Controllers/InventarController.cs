@@ -370,6 +370,7 @@ public class InventarController : MonoBehaviour, IController
             else
             {
                 toolButton.SetActive(false);
+                materialButton.SetActive(false);
                 OpenMaterialList();
             }
 
