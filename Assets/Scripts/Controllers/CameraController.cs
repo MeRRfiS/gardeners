@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class CameraController : MonoBehaviour, IController
 {
     [Header("Components")]
@@ -10,7 +10,8 @@ public class CameraController : MonoBehaviour, IController
 
     [Header("Settings")]
     [SerializeField] private float offsetSmoothing = 1f;
-    private CameraStatusEnum status = CameraStatusEnum.InHouse;
+    [SerializeField] private Vector2 maxPosition;
+    [SerializeField] private CameraStatusEnum status = CameraStatusEnum.InHouse;
 
     public LoadStatusEnum Status { get; private set; }
 
@@ -31,7 +32,7 @@ public class CameraController : MonoBehaviour, IController
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         var newPosition = new Vector3();
 
@@ -41,8 +42,8 @@ public class CameraController : MonoBehaviour, IController
                 newPosition = new Vector3(0, 0, -10);
                 break;
             case CameraStatusEnum.Outdoor:
-                newPosition = new Vector3(Mathf.Clamp(player.transform.position.x, -16, 16),
-                                          Mathf.Clamp(player.transform.position.y, -20, 20),
+                newPosition = new Vector3(Mathf.Clamp(player.transform.position.x, -maxPosition.x, maxPosition.x),
+                                          Mathf.Clamp(player.transform.position.y, -maxPosition.y, maxPosition.y),
                                           -10);
                 break;
         }
