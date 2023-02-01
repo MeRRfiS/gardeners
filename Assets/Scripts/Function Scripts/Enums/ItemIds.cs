@@ -1,4 +1,5 @@
 ﻿public enum ItemIds
 {
-    KVZHP = 0
+    KVZHP = 0,
+    Axe = 1
 }

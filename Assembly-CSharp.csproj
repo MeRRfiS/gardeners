@@ -80,8 +80,9 @@
     <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
     <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Stuctures\ItemsStruct.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\StartGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

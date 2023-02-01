@@ -99,7 +99,7 @@ public class DialogueController : MonoBehaviour, IController
         {
             if (((Ink.Runtime.IntValue)GetVariableState(GlobalVariablesConstants.GET_KVZHP)).value == 1)
             {
-                var item = new ItemsStruct((int)ItemIds.KVZHP,
+                var item = new ItemsModel((int)ItemIds.KVZHP,
                                            TextController.items.ItemName[(int)ItemIds.KVZHP],
                                            ItemsTypeEnum.Tool);
                 InventarController.GetInstance().AddNewItemTool(item);
@@ -191,6 +191,10 @@ public class DialogueController : MonoBehaviour, IController
     public void SetVariableState(string variableName, Ink.Runtime.Object variableValue)
     {
         dialogueVariables.VariableChanged(variableName, variableValue);
+        if (dialogueVariables != null)
+        {
+            dialogueVariables.SaveVariables();
+        }
     }
 
     public void OnApplicationQuit()
