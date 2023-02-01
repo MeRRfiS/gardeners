@@ -13,7 +13,6 @@ public class CameraController : MonoBehaviour, IController
     [SerializeField] private Vector2 maxPosition;
     [SerializeField] private CameraStatusEnum status = CameraStatusEnum.InHouse;
 
-    public Transform cameraShakeTransform;
     public LoadStatusEnum Status { get; private set; }
 
     public void StartUp()
@@ -51,11 +50,6 @@ public class CameraController : MonoBehaviour, IController
 
         camera.transform.position = Vector3.Lerp(camera.transform.position,
                                                          newPosition,
-                                                         offsetSmoothing * Time.deltaTime)+cameraShakeTransform.position;
-    }
-
-    public void CameraShake(float duration, float strenght)
-    {
-        cameraShakeTransform.DOShakePosition(duration, strenght);
+                                                         offsetSmoothing * Time.deltaTime);
     }
 }

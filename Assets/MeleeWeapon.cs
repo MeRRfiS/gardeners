@@ -22,7 +22,6 @@ public class MeleeWeapon : MonoBehaviour
         {
             StartCoroutine(AttackCoroutine());
             isAttacking = true;
-            camController.CameraShake(0.2f,0.2f);
             DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, 0.2f).SetEase(attackEase).OnComplete(() =>
             isAttacking = false
             );
