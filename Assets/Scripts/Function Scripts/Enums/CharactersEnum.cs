@@ -1,4 +1,5 @@
 ﻿public enum CharactersEnum
 {
-    Ernest = 1
+    Ernest = 1,
+    Adelina = 2
 }

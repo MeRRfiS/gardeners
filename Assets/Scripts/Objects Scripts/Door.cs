@@ -24,15 +24,15 @@ public class Door : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E))
         {
-            if (player.transform.position.y < transform.position.y)
+            if (player.transform.position.y > transform.position.y)
             {
                 player.transform.position = new Vector3(transform.position.x,
-                                                        transform.position.y + 2f);
+                                                        transform.position.y - 2f);
             }
             else
             {
                 player.transform.position = new Vector3(transform.position.x,
-                                                        transform.position.y - 2f);
+                                                        transform.position.y + 2f);
             }
 
             camController.ChangeCameraStatus();

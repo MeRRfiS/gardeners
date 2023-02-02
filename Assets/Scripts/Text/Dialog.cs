@@ -45,6 +45,8 @@ public class Dialog : MonoBehaviour
             }
             
             playerController.IsCanMove = false;
+            DialogueController.GetInstance().SetVariableState(GlobalVariablesConstants.CHARACTER_INDEX, 
+                                                              new Ink.Runtime.IntValue((int)character));
             DialogueController.GetInstance().EnterDialogueMode(character);
         }
     }

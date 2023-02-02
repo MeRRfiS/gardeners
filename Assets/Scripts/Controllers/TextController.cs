@@ -7,19 +7,32 @@ using UnityEngine.UI;
 
 public class TextController : MonoBehaviour, IController
 {
+    private static TextController instance;
+
     private string json;
     private const string LANGUAGE = "ua_UKR.json";
 
     public static UIText uiText = new UIText();
     public static Items items = new Items();
 
+    [Header("Message")]
+    public GameObject warningPanel;
+
     public LoadStatusEnum Status { get; private set; }
 
     public void StartUp()
     {
+        instance = this;
+        warningPanel.SetActive(false);
+
         LangLoad();
 
         Status = LoadStatusEnum.IsLoaded;
+    }
+
+    public static TextController GetInstance()
+    {
+        return instance;
     }
 
     void LangLoad()
@@ -59,6 +72,6 @@ public class UIText
 }
 public class Items
 {
-    public string[] ItemName = new string[1];
-    public string[] ItemDis = new string[2];
+    public string[] ItemName = new string[10];
+    public string[] ItemDis = new string[10];
 }

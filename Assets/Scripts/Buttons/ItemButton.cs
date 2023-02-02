@@ -84,4 +84,52 @@ public class ItemButton : MonoBehaviour
 
         InventarController.GetInstance().UpdateSelectItem();
     }
+
+    public void OpenInfoGoods()
+    {
+        InventarController.GetInstance().OpenGoodsInfoPanel(_index);
+    }
+
+    public void CloseInfoGoods()
+    {
+        InventarController.GetInstance().CloseGoodsInfoPanel();
+    }
+
+    public void BuyItem()
+    {
+        var goods = InventarController.GetInstance().itemsShop[_index];
+
+        foreach (var material in goods.Materials)
+        {
+            if (InventarController.GetInstance().itemsMaterial.ContainsKey(material.Index))
+            {
+                if(InventarController.GetInstance().itemsMaterial[material.Index].Count < material.Count)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        foreach (var material in goods.Materials)
+        {
+            InventarController.GetInstance().itemsMaterial[material.Index].Count -= material.Count;
+            if(InventarController.GetInstance().itemsMaterial[material.Index].Count == 0)
+            {
+                InventarController.GetInstance().itemsMaterial.Remove(material.Index);
+            }
+        }
+
+        var item = new ItemsModel(_index,
+                                  TextController.items.ItemName[_index],
+                                  ItemsTypeEnum.Tool);
+        InventarController.GetInstance().AddNewItemTool(item);
+
+        InventarController.GetInstance().itemsShop.Remove(_index);
+        InventarController.GetInstance().CloseGoodsInfoPanel();
+        InventarController.GetInstance().OpenShop();
+    }
 }

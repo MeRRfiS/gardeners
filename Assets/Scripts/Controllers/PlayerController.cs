@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour, IController
 
     private void FixedUpdate()
     {
-        rigidbody2D.MovePosition(rigidbody2D.position + moveDir * Time.deltaTime);
+        if (_isCanMove)
+        {
+            rigidbody2D.MovePosition(rigidbody2D.position + moveDir * Time.deltaTime);
+        }
     }
 }

@@ -26,6 +26,12 @@ public class StartGame : MonoBehaviour
 
     public void ToLoadGame()
     {
+        if(InventarController.GetInstance().weaponSelect == null)
+        {
+            TextController.GetInstance().warningPanel.SetActive(true);
+            return;
+        }
+
         SceneManager.LoadScene("Level1");
     }
 }

@@ -85,17 +85,19 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\InventarController.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Models\EnemiesModel.cs" />
     <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Models\EnemiesModel.cs" />
-    <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Models\GoodsModel.cs" />
+    <Compile Include="Assets\Scripts\Buttons\MessageButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -907,10 +909,6 @@
       <Project>{66851969-5AF5-B9DA-80CA-2624A8C5D294}</Project>
       <Name>Ink-Libraries</Name>
     </ProjectReference>
-    <ProjectReference Include="InkEditor.csproj">
-      <Project>{F0162717-ECBC-4E62-6AD5-5CB1A52AFADB}</Project>
-      <Name>InkEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="NavMeshPlusEditor.csproj">
       <Project>{3C942665-182F-038B-47D2-F62E7DE81A46}</Project>
       <Name>NavMeshPlusEditor</Name>
@@ -918,6 +916,10 @@
     <ProjectReference Include="NavMeshPlus.csproj">
       <Project>{6540933B-366D-B5AB-D304-925531A367D0}</Project>
       <Name>NavMeshPlus</Name>
+    </ProjectReference>
+    <ProjectReference Include="InkEditor.csproj">
+      <Project>{F0162717-ECBC-4E62-6AD5-5CB1A52AFADB}</Project>
+      <Name>InkEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

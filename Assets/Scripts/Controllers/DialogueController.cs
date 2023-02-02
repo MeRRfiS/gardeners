@@ -30,6 +30,7 @@ public class DialogueController : MonoBehaviour, IController
     [SerializeField] private Button buttonPrefab;
     private List<GameObject> choices = new List<GameObject>();
     public bool dialogueIsPlaying { get; private set; }
+    private bool answerIsOpen = false;
 
     public int choiceIndex { private get; set; }
 
@@ -105,6 +106,11 @@ public class DialogueController : MonoBehaviour, IController
                 InventarController.GetInstance().AddNewItemTool(item);
                 SetVariableState(GlobalVariablesConstants.GET_KVZHP, new IntValue(2));
             }
+            if (((Ink.Runtime.BoolValue)GetVariableState(GlobalVariablesConstants.OPEN_SHOP)).value)
+            {
+                InventarController.GetInstance().OpenShop();
+                SetVariableState(GlobalVariablesConstants.OPEN_SHOP, new BoolValue(false));
+            }
 
             ExitDialogueMode();
         }
@@ -133,6 +139,7 @@ public class DialogueController : MonoBehaviour, IController
         index = 0;
         foreach (Choice choice in currentChoices)
         {
+            answerIsOpen = true;
             choisesScroll.SetActive(true);
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
@@ -153,6 +160,7 @@ public class DialogueController : MonoBehaviour, IController
 
     public void MakeChoice()
     {
+        answerIsOpen = false;
         choisesScroll.SetActive(false);
         currentStory.ChooseChoiceIndex(choiceIndex);
         ContinueStory();
@@ -170,7 +178,7 @@ public class DialogueController : MonoBehaviour, IController
     {
         if (!dialogueIsPlaying) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !answerIsOpen)
         {
             ContinueStory();
         }

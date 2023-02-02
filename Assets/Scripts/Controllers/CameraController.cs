@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour, IController
         switch (status)
         {
             case CameraStatusEnum.InHouse:
-                newPosition = new Vector3(0, 0, -10);
+                newPosition = new Vector3(0, 6, -10);
                 break;
             case CameraStatusEnum.Outdoor:
                 newPosition = new Vector3(Mathf.Clamp(player.transform.position.x, -maxPosition.x, maxPosition.x),
