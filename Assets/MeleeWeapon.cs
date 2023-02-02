@@ -7,12 +7,13 @@ public class MeleeWeapon : MonoBehaviour
 {
     [SerializeField] private float angleOffset = 90;
     [SerializeField] private Ease attackEase;
-    [SerializeField] private float attackTime = 0.2f;
+    private float attackTime;
     [SerializeField] private bool isAttacking = false;
     [SerializeField] public CameraController camController;
     void Start()
     {
         DOTween.Init();
+        attackTime = PlayerController.GetInstance().SpeedAttack;
     }
 
     // Update is called once per frame

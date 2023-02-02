@@ -69,6 +69,7 @@ public class ControllerLobbiManager : MonoBehaviour, IControllerManager
             yield return null;
         }
 
-        Debug.Log("All handlers is ready");
+        PlayerController.GetInstance().SetValueToPlayer();
+        Debug.Log("All contollers is ready");
     }
 }

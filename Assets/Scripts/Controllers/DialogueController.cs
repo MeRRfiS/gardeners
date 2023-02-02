@@ -163,6 +163,7 @@ public class DialogueController : MonoBehaviour, IController
         answerIsOpen = false;
         choisesScroll.SetActive(false);
         currentStory.ChooseChoiceIndex(choiceIndex);
+        Debug.Log("I am here!");
         ContinueStory();
     }
 
@@ -178,7 +179,8 @@ public class DialogueController : MonoBehaviour, IController
     {
         if (!dialogueIsPlaying) return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !answerIsOpen)
+        //Debug.Log(answerIsOpen);
+        if (Input.GetMouseButtonDown(1) && !answerIsOpen)
         {
             ContinueStory();
         }
