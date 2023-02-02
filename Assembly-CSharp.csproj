@@ -76,6 +76,8 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\DialogsConstants.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\EnemyTypesEnum.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\ItemIds.cs" />
     <Compile Include="Assets\Scripts\Controllers\TextController.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
@@ -92,6 +94,8 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Models\EnemiesModel.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -906,6 +910,14 @@
     <ProjectReference Include="InkEditor.csproj">
       <Project>{F0162717-ECBC-4E62-6AD5-5CB1A52AFADB}</Project>
       <Name>InkEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshPlusEditor.csproj">
+      <Project>{3C942665-182F-038B-47D2-F62E7DE81A46}</Project>
+      <Name>NavMeshPlusEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshPlus.csproj">
+      <Project>{6540933B-366D-B5AB-D304-925531A367D0}</Project>
+      <Name>NavMeshPlus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -911,6 +911,14 @@
       <Project>{F0162717-ECBC-4E62-6AD5-5CB1A52AFADB}</Project>
       <Name>InkEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="NavMeshPlusEditor.csproj">
+      <Project>{3C942665-182F-038B-47D2-F62E7DE81A46}</Project>
+      <Name>NavMeshPlusEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshPlus.csproj">
+      <Project>{6540933B-366D-B5AB-D304-925531A367D0}</Project>
+      <Name>NavMeshPlus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

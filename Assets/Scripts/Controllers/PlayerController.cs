@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IController
     private Vector2 moveDir;
 
     [Header("Components")]
+    [SerializeField] private GameObject _player;
     [SerializeField] private Rigidbody2D rigidbody2D;
 
     [Header("Player Status")]
@@ -16,10 +17,16 @@ public class PlayerController : MonoBehaviour, IController
 
     private bool _isCanMove = true;
 
+    public GameObject Player
+    {
+        get { return _player; }
+    }
+
     public bool IsCanMove
     {
         set { _isCanMove = value; }
     }
+
     public LoadStatusEnum Status { get; private set; }
 
     public void StartUp()

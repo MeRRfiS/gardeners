@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,6 +68,8 @@ public class ProceduralMapGenerator : MonoBehaviour
                     floorMap.SetTile(walkerPos + new Vector3Int(0, a), floor);
                 }
             }
-        } 
+        }
+
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 }
