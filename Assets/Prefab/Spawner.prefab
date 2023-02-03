@@ -482,6 +482,7 @@ MonoBehaviour:
   type: 1
   enemyPrefab: {fileID: 5944203701363538464, guid: 9ffa3f9e7f954af45a1c140afe32a14b, type: 3}
   healthSlider: {fileID: 4111404072196805263}
+  itemPrefab: {fileID: 5586732912451683115, guid: 5dac183be8ff4b6469596849530f22a8, type: 3}
 --- !u!114 &4574539136087954030
 MonoBehaviour:
   m_ObjectHideFlags: 0

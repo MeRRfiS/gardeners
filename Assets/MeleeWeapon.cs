@@ -7,7 +7,7 @@ public class MeleeWeapon : MonoBehaviour
 {
     [SerializeField] private float angleOffset = 90;
     [SerializeField] private Ease attackEase;
-    [SerializeField] private float attackTime;
+    private float attackTime;
     [SerializeField] private bool isAttacking = false;
     [SerializeField] public CameraController camController;
 
@@ -25,7 +25,7 @@ public class MeleeWeapon : MonoBehaviour
         {
             StartCoroutine(AttackCoroutine());
             isAttacking = true;
-            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, attackTime).SetEase(attackEase).OnComplete(() =>
+i            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, attackTime).SetEase(attackEase).OnComplete(() =>
             isAttacking = false
             );
         }

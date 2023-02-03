@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartGame : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class StartGame : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject loadingWindow;
+    [SerializeField] private Slider slider;
+
     public void ToLoadGame()
     {
         if(InventarController.GetInstance().weaponSelect == null)
@@ -32,6 +36,20 @@ public class StartGame : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene("Level1");
+        StartCoroutine(LoadAsync("Level1"));
+    }
+
+    IEnumerator LoadAsync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        loadingWindow.SetActive(true);
+
+        while (!asyncLoad.isDone)
+        {
+            slider.value = asyncLoad.progress;
+
+            yield return null;
+        }
     }
 }

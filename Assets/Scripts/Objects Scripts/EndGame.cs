@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndGame : MonoBehaviour
 {
     public int ScenarioIndex { get; set; }
+    [SerializeField] private GameObject loadingWindow;
+    [SerializeField] private Slider slider;
 
     public void EndGameButton()
     {
@@ -21,19 +24,33 @@ public class EndGame : MonoBehaviour
                 {
                     Destroy(item);
                 }
-
-                SceneManager.LoadScene("Lobbi");
+                Time.timeScale = 1;
+                StartCoroutine(LoadAsync("Lobbi"));
                 break;
             case (1):
                 InventarController.GetInstance().ResetData();
-
-                SceneManager.LoadScene("Menu");
+                Time.timeScale = 1;
+                StartCoroutine(LoadAsync("Menu"));
                 break;
             case (2):
                 InventarController.GetInstance().ResetData();
-
-                SceneManager.LoadScene("Menu");
+                Time.timeScale = 1;
+                StartCoroutine(LoadAsync("Menu"));
                 break;
+        }
+    }
+
+    IEnumerator LoadAsync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        loadingWindow.SetActive(true);
+
+        while (!asyncLoad.isDone)
+        {
+            slider.value = asyncLoad.progress;
+
+            yield return null;
         }
     }
 }

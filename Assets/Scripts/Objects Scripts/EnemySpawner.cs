@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Enemy enemyPrefab;
 
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private GameObject itemPrefab;
 
     public int Health { get; set; }
 
@@ -85,5 +86,17 @@ public class EnemySpawner : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        var itemModel = new ItemsModel((int)ItemIds.APieceOfForestRoot,
+                                       TextController.items.ItemName[(int)ItemIds.APieceOfForestRoot],
+                                       ItemsTypeEnum.Material);
+
+        var itemObj = Instantiate(itemPrefab);
+        itemObj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>($"ItemMiniIcon/{itemModel.Index}");
+        itemObj.transform.position = gameObject.transform.position;
+        itemObj.GetComponent<TropItem>().Item = itemModel;
     }
 }

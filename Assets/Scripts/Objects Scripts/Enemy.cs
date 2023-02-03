@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        if (Random.Range(1, 101) <= (100 / _enemiesModel.Duration))
+        if (Random.Range(1, 101) <= (100 / (30 / _enemiesModel.Duration)))
         {
             itemsModel.Add(new ItemsModel((int)ItemIds.Heal,
                                            "",
@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
         foreach (var itemModel in itemsModel)
         {
             var itemObj = Instantiate(itemPrefab);
+            itemObj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>($"ItemMiniIcon/{itemModel.Index}");
             itemObj.transform.position = gameObject.transform.position;
             itemObj.GetComponent<TropItem>().Item = itemModel;
         }

@@ -131,5 +131,6 @@ public class ItemButton : MonoBehaviour
         InventarController.GetInstance().itemsShop.Remove(_index);
         InventarController.GetInstance().CloseGoodsInfoPanel();
         InventarController.GetInstance().OpenShop();
+        InventarController.GetInstance().SaveInventoryToFile();
     }
 }

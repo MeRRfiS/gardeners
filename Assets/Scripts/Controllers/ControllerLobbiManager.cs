@@ -18,10 +18,10 @@ public class ControllerLobbiManager : MonoBehaviour, IControllerManager
     {
         controllers.Add(saveController);
         controllers.Add(textController);
+        controllers.Add(inventarController);
         controllers.Add(playerController);
         controllers.Add(dialogueController);
         controllers.Add(cameraController);
-        controllers.Add(inventarController);
 
         StartCoroutine(LoadControllers());
     }

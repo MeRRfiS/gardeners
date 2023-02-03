@@ -262,8 +262,9 @@ public class InventarController : MonoBehaviour, IController
 
             var button = Instantiate(buttonPrefab, toolContent);
             button.GetComponent<ItemButton>().ItemIndex = item.Value.Index;
-            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
-                String.IsNullOrEmpty(item.Value.Name) ? TextController.items.ItemName[item.Value.Index] : item.Value.Name;
+            button.transform.GetChild(0).GetComponent<Image>().sprite =
+                Resources.Load<Sprite>($"ItemMiniIcon/{item.Value.Index}");
+            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = TextController.items.ItemName[item.Value.Index];
             button.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = item.Value.Count.ToString();
             items.Add(button);
         }
@@ -282,7 +283,9 @@ public class InventarController : MonoBehaviour, IController
         {
             var button = Instantiate(buttonPrefab, materialContent);
             button.GetComponent<ItemButton>().ItemIndex = item.Value.Index;
-            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = item.Value.Name;
+            button.transform.GetChild(0).GetComponent<Image>().sprite =
+                Resources.Load<Sprite>($"ItemMiniIcon/{item.Value.Index}");
+            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = TextController.items.ItemName[item.Value.Index];
             button.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = item.Value.Count.ToString();
             items.Add(button);
         }
@@ -423,13 +426,16 @@ public class InventarController : MonoBehaviour, IController
         {
             var buttonObj = Instantiate(shopButton, shopContent);
             buttonObj.GetComponent<ItemButton>().ItemIndex = goodsModel.Value.IndexItem;
-            buttonObj.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text =
-                String.IsNullOrEmpty(goodsModel.Value.Name) ? TextController.items.ItemName[goodsModel.Value.IndexItem] : goodsModel.Value.Name;
+            buttonObj.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                Resources.Load<Sprite>($"ItemMiniIcon/{goodsModel.Value.IndexItem}");
+            buttonObj.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = TextController.items.ItemName[goodsModel.Value.IndexItem];
             var price = buttonObj.transform.GetChild(1);
 
             foreach (ItemsModel item in goodsModel.Value.Materials)
             {
                 var itemObj = Instantiate(materialPrefab, price);
+                itemObj.transform.GetComponentInChildren<Image>().sprite =
+                    Resources.Load<Sprite>($"ItemMiniIcon/{item.Index}");
                 itemObj.transform.GetComponentInChildren<TextMeshProUGUI>().text = item.Count.ToString();
             }
 
