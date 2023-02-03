@@ -180,7 +180,7 @@ public class DialogueController : MonoBehaviour, IController
         if (!dialogueIsPlaying) return;
 
         //Debug.Log(answerIsOpen);
-        if (Input.GetMouseButtonDown(1) && !answerIsOpen)
+        if (Input.GetMouseButtonDown(0) && !answerIsOpen)
         {
             ContinueStory();
         }

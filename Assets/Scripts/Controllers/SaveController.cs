@@ -19,10 +19,10 @@ public class SaveController : MonoBehaviour, IController
 #if !UNITY_EDITOR
         pathSave = Path.Combine(Application.persistentDataPath, saveFileName);
 
-        var readerTC = new WWW(pathTimeCode);
-        while(!readerTC.isDone) { }
-        var jsonTC = readerTC.text;
-        tc = JsonUtility.FromJson<TimeCodes>(jsonTC);
+        var reader = new WWW(pathSave);
+        while(!reader.isDone) { }
+        var json = reader.text;
+        sv = JsonUtility.FromJson<Save>(json);
 #else
         pathSave = Path.Combine(Application.dataPath, saveFileName);
 #endif

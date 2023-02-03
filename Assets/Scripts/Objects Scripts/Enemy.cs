@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     {
         while (isHitPlayer)
         {
-            Debug.Log($"D: {_enemiesModel.Damage}");
+            PlayerController.GetInstance().healthBar.value -= _enemiesModel.Damage;
 
             yield return new WaitForSeconds(0.5f);
         }

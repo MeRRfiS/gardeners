@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
     <Compile Include="Assets\Scripts\Text\DialogueVariables.cs" />
     <Compile Include="Assets\Scripts\Controllers\DialogueController.cs" />
+    <Compile Include="Assets\Scripts\Buttons\MessageButton.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\CameraStatusEnum.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\ItemsTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Maps\ProceduralMapGenerator.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Scripts\Function Scripts\Enums\CharactersEnum.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\DialogsConstants.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Models\GoodsModel.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\EnemyTypesEnum.cs" />
@@ -96,8 +98,6 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Function Scripts\Models\GoodsModel.cs" />
-    <Compile Include="Assets\Scripts\Buttons\MessageButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour, IController
 
     [Header("UI Components")]
     [SerializeField] private GameObject playerStatistic;
-    [SerializeField] private Slider healthBar;
+    public Slider healthBar;
 
     private bool _isCanMove = true;
     private bool hasKVZHP = false;
@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour, IController
         SpeedAttack += bonusSpeedAttack;
 
         healthBar.maxValue = Heath;
+        healthBar.value = Heath;
     }
 
     private void Update()
@@ -129,6 +130,7 @@ public class PlayerController : MonoBehaviour, IController
         if (hasKVZHP)
         {
             playerStatistic.SetActive(true);
+            Debug.Log($"{healthBar.value}|{Heath * 0.2f}");
             if(healthBar.value < (Heath * 0.2f))
             {
                 SceneManager.LoadScene("Lobbi");

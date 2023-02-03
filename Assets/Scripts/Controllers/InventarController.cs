@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,11 +20,11 @@ public class InventarController : MonoBehaviour, IController
     public List<ItemsModel> itemSelect { get; set; }
     public ItemsModel weaponSelect { get; set; }
 
-    private const string SAVE_TOOL_ITEMS_KEY = "ITEMS_TOOL";
-    private const string SAVE_MATERIAL_ITEMS_KEY = "ITEMS_MATERIAL";
-    private const string SAVE_SHOP_ITEMS_KEY = "ITEMS_SHOP";
-    private const string SAVE_SELECT_ITEMS_KEY = "SELECT_ITEMS";
-    private const string SAVE_SELECT_WEAPON_KEY = "SELECT_WEAPON";
+    private const string SAVE_TOOL_ITEMS_KEY = "Inventar Files/ITEMS_TOOL.json";
+    private const string SAVE_MATERIAL_ITEMS_KEY = "Inventar Files/ITEMS_MATERIAL.json";
+    private const string SAVE_SHOP_ITEMS_KEY = "Inventar Files/ITEMS_SHOP.json";
+    private const string SAVE_SELECT_ITEMS_KEY = "Inventar Files/SELECT_ITEMS.json";
+    private const string SAVE_SELECT_WEAPON_KEY = "Inventar Files/SELECT_WEAPON.json";
 
     [Header("Components")]
     public GameObject inventoryPanel;
@@ -56,9 +57,77 @@ public class InventarController : MonoBehaviour, IController
     [SerializeField] private TextMeshProUGUI discriptionGoods;
     private List<GameObject> goods = new List<GameObject>();
 
+    //path to file with items
+    private string pathToolItems;
+    private string pathMaterialItems;
+    private string pathShopItems;
+    private string pathSelectItems;
+    private string pathWeaponItem;
+
     private bool isCantOpen = false;
 
     public LoadStatusEnum Status { get; private set; }
+
+    private T SetValueFromJson<T>(T value, string path)
+    {
+        if (File.Exists(path))
+        {
+#if !UNITY_EDITOR
+            var reader = new WWW(path);
+            while(!reader.isDone) { }
+            var json = reader.text;
+#else
+            var json = File.ReadAllText(path);
+#endif
+            if (json == "null" || json == "{}" || json == "[]")
+                return value;
+
+            value = JsonConvert.DeserializeObject<T>(json);
+        }
+
+        return value;
+    }
+
+    private void SetItems()
+    {
+        itemsTool = SetValueFromJson<Dictionary<int, ItemsModel>>(itemsTool, pathToolItems);
+        if (itemsTool == null)
+        {
+            itemsTool = new Dictionary<int, ItemsModel>();
+            itemsTool.Add((int)ItemIds.Axe, new ItemsModel((int)ItemIds.Axe,
+                                                            TextController.items.ItemName[(int)ItemIds.Axe],
+                                                            ItemsTypeEnum.Weapon));
+        }
+
+        itemsMaterial = SetValueFromJson<Dictionary<int, ItemsModel>>(itemsMaterial, pathMaterialItems);
+        if (itemsMaterial == null)
+        {
+            itemsMaterial = new Dictionary<int, ItemsModel>();
+        }
+
+        itemsShop = SetValueFromJson<Dictionary<int, GoodsModel>>(itemsShop, pathShopItems);
+        if (itemsShop == null)
+        {
+            itemsShop = new Dictionary<int, GoodsModel>();
+
+            AddNewGoods(ItemIds.TechGloves, ItemsTypeEnum.Tool);
+            AddNewGoods(ItemIds.SensoryBoots, ItemsTypeEnum.Tool);
+            AddNewGoods(ItemIds.Blade, ItemsTypeEnum.Tool);
+            AddNewGoods(ItemIds.NATOBulletproofVest, ItemsTypeEnum.Tool);
+        }
+
+        itemSelect = SetValueFromJson<List<ItemsModel>>(itemSelect, pathSelectItems);
+        if (itemSelect == null)
+        {
+            itemSelect = new List<ItemsModel>();
+        }
+
+        weaponSelect = SetValueFromJson<ItemsModel>(weaponSelect, pathWeaponItem);
+        if (weaponSelect == null)
+        {
+            weaponSelect = null;
+        }
+    }
 
     public void StartUp()
     {
@@ -69,91 +138,108 @@ public class InventarController : MonoBehaviour, IController
         shopPanel.SetActive(false);
         infoShopPanel.SetActive(false);
 
-        if (PlayerPrefs.HasKey(SAVE_TOOL_ITEMS_KEY))
-        {
-            itemsTool = JsonConvert.DeserializeObject<Dictionary<int, ItemsModel>>
-                (PlayerPrefs.GetString(SAVE_TOOL_ITEMS_KEY));
-            if(itemsTool == null)
-            {
-                itemsTool = new Dictionary<int, ItemsModel>();
-                itemsTool.Add((int)ItemIds.Axe, new ItemsModel((int)ItemIds.Axe,
-                                                                TextController.items.ItemName[(int)ItemIds.Axe],
-                                                                ItemsTypeEnum.Weapon));
-            }
-        }
-        else
-        {
-            itemsTool = new Dictionary<int, ItemsModel>();
-            itemsTool.Add((int)ItemIds.Axe, new ItemsModel((int)ItemIds.Axe,
-                                                            TextController.items.ItemName[(int)ItemIds.Axe],
-                                                            ItemsTypeEnum.Weapon));
-        }
+#if !UNITY_EDITOR
+        pathToolItems = Path.Combine(Application.persistentDataPath, SAVE_TOOL_ITEMS_KEY);
+        pathMaterialItems = Path.Combine(Application.persistentDataPath, SAVE_MATERIAL_ITEMS_KEY);
+        pathShopItems = Path.Combine(Application.persistentDataPath, SAVE_SHOP_ITEMS_KEY);
+        pathSelectItems = Path.Combine(Application.persistentDataPath, SAVE_SELECT_ITEMS_KEY);
+        pathWeaponItem = Path.Combine(Application.persistentDataPath, SAVE_SELECT_WEAPON_KEY);
 
-        if (PlayerPrefs.HasKey(SAVE_MATERIAL_ITEMS_KEY))
-        {
-            itemsMaterial = JsonConvert.DeserializeObject<Dictionary<int, ItemsModel>>
-                (PlayerPrefs.GetString(SAVE_MATERIAL_ITEMS_KEY));
-            if (itemsMaterial == null)
-            {
-                itemsMaterial = new Dictionary<int, ItemsModel>();
-            }
-        }
-        else
-        {
-            itemsMaterial = new Dictionary<int, ItemsModel>();
-        }
+        SetItems();
+#else
+        pathToolItems = Path.Combine(Application.dataPath, SAVE_TOOL_ITEMS_KEY);
+        pathMaterialItems = Path.Combine(Application.dataPath, SAVE_MATERIAL_ITEMS_KEY);
+        pathShopItems = Path.Combine(Application.dataPath, SAVE_SHOP_ITEMS_KEY);
+        pathSelectItems = Path.Combine(Application.dataPath, SAVE_SELECT_ITEMS_KEY);
+        pathWeaponItem = Path.Combine(Application.dataPath, SAVE_SELECT_WEAPON_KEY);
+#endif
+        SetItems();
 
-        if (PlayerPrefs.HasKey(SAVE_SHOP_ITEMS_KEY))
-        {
-            itemsShop = JsonConvert.DeserializeObject<Dictionary<int, GoodsModel>>
-                (PlayerPrefs.GetString(SAVE_SHOP_ITEMS_KEY));
-            if (itemsShop == null)
-            {
-                itemsShop = new Dictionary<int, GoodsModel>();
+        //if (PlayerPrefs.HasKey(SAVE_TOOL_ITEMS_KEY))
+        //{
+        //    itemsTool = JsonConvert.DeserializeObject<Dictionary<int, ItemsModel>>
+        //        (PlayerPrefs.GetString(SAVE_TOOL_ITEMS_KEY));
+        //    if(itemsTool == null)
+        //    {
+        //        itemsTool = new Dictionary<int, ItemsModel>();
+        //        itemsTool.Add((int)ItemIds.Axe, new ItemsModel((int)ItemIds.Axe,
+        //                                                        TextController.items.ItemName[(int)ItemIds.Axe],
+        //                                                        ItemsTypeEnum.Weapon));
+        //    }
+        //}
+        //else
+        //{
+        //    itemsTool = new Dictionary<int, ItemsModel>();
+        //    itemsTool.Add((int)ItemIds.Axe, new ItemsModel((int)ItemIds.Axe,
+        //                                                    TextController.items.ItemName[(int)ItemIds.Axe],
+        //                                                    ItemsTypeEnum.Weapon));
+        //}
 
-                AddNewGoods(ItemIds.TechGloves, ItemsTypeEnum.Tool);
-                AddNewGoods(ItemIds.SensoryBoots, ItemsTypeEnum.Tool);
-                AddNewGoods(ItemIds.Blade, ItemsTypeEnum.Tool);
-                AddNewGoods(ItemIds.NATOBulletproofVest, ItemsTypeEnum.Tool);
-            }
-        }
-        else
-        {
-            itemsShop = new Dictionary<int, GoodsModel>();
+        //if (PlayerPrefs.HasKey(SAVE_MATERIAL_ITEMS_KEY))
+        //{
+        //    itemsMaterial = JsonConvert.DeserializeObject<Dictionary<int, ItemsModel>>
+        //        (PlayerPrefs.GetString(SAVE_MATERIAL_ITEMS_KEY));
+        //    if (itemsMaterial == null)
+        //    {
+        //        itemsMaterial = new Dictionary<int, ItemsModel>();
+        //    }
+        //}
+        //else
+        //{
+        //    itemsMaterial = new Dictionary<int, ItemsModel>();
+        //}
 
-            AddNewGoods(ItemIds.TechGloves, ItemsTypeEnum.Tool);
-            AddNewGoods(ItemIds.SensoryBoots, ItemsTypeEnum.Tool);
-            AddNewGoods(ItemIds.Blade, ItemsTypeEnum.Tool);
-            AddNewGoods(ItemIds.NATOBulletproofVest, ItemsTypeEnum.Tool);
-        }
+        //if (PlayerPrefs.HasKey(SAVE_SHOP_ITEMS_KEY))
+        //{
+        //    itemsShop = JsonConvert.DeserializeObject<Dictionary<int, GoodsModel>>
+        //        (PlayerPrefs.GetString(SAVE_SHOP_ITEMS_KEY));
+        //    if (itemsShop == null)
+        //    {
+        //        itemsShop = new Dictionary<int, GoodsModel>();
 
-        if (PlayerPrefs.HasKey(SAVE_SELECT_ITEMS_KEY))
-        {
-            itemSelect = JsonConvert.DeserializeObject<List<ItemsModel>>
-                (PlayerPrefs.GetString(SAVE_SELECT_ITEMS_KEY));
-            if (itemSelect == null)
-            {
-                itemSelect = new List<ItemsModel>();
-            }
-        }
-        else
-        {
-            itemSelect = new List<ItemsModel>();
-        }
+        //        AddNewGoods(ItemIds.TechGloves, ItemsTypeEnum.Tool);
+        //        AddNewGoods(ItemIds.SensoryBoots, ItemsTypeEnum.Tool);
+        //        AddNewGoods(ItemIds.Blade, ItemsTypeEnum.Tool);
+        //        AddNewGoods(ItemIds.NATOBulletproofVest, ItemsTypeEnum.Tool);
+        //    }
+        //}
+        //else
+        //{
+        //    itemsShop = new Dictionary<int, GoodsModel>();
 
-        if (PlayerPrefs.HasKey(SAVE_SELECT_WEAPON_KEY))
-        {
-            weaponSelect = JsonConvert.DeserializeObject<ItemsModel>
-                (PlayerPrefs.GetString(SAVE_SELECT_WEAPON_KEY));
-            if (weaponSelect == null)
-            {
-                weaponSelect = null;
-            }
-        }
-        else
-        {
-            weaponSelect = null;
-        }
+        //    AddNewGoods(ItemIds.TechGloves, ItemsTypeEnum.Tool);
+        //    AddNewGoods(ItemIds.SensoryBoots, ItemsTypeEnum.Tool);
+        //    AddNewGoods(ItemIds.Blade, ItemsTypeEnum.Tool);
+        //    AddNewGoods(ItemIds.NATOBulletproofVest, ItemsTypeEnum.Tool);
+        //}
+
+        //if (PlayerPrefs.HasKey(SAVE_SELECT_ITEMS_KEY))
+        //{
+        //    itemSelect = JsonConvert.DeserializeObject<List<ItemsModel>>
+        //        (PlayerPrefs.GetString(SAVE_SELECT_ITEMS_KEY));
+        //    if (itemSelect == null)
+        //    {
+        //        itemSelect = new List<ItemsModel>();
+        //    }
+        //}
+        //else
+        //{
+        //    itemSelect = new List<ItemsModel>();
+        //}
+
+        //if (PlayerPrefs.HasKey(SAVE_SELECT_WEAPON_KEY))
+        //{
+        //    weaponSelect = JsonConvert.DeserializeObject<ItemsModel>
+        //        (PlayerPrefs.GetString(SAVE_SELECT_WEAPON_KEY));
+        //    if (weaponSelect == null)
+        //    {
+        //        weaponSelect = null;
+        //    }
+        //}
+        //else
+        //{
+        //    weaponSelect = null;
+        //}
 
         Status = LoadStatusEnum.IsLoaded;
     }
@@ -476,6 +562,7 @@ public class InventarController : MonoBehaviour, IController
                 toolButton.SetActive(true);
                 materialButton.SetActive(true);
                 OpenToolList();
+                UpdateSelectItem();
             }
             else
             {
@@ -484,7 +571,6 @@ public class InventarController : MonoBehaviour, IController
                 OpenMaterialList();
             }
 
-            UpdateSelectItem();
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
             myItemsPanel.SetActive(!myItemsPanel.activeSelf);
             PlayerController.GetInstance().IsCanMove = !inventoryPanel.activeSelf;
@@ -510,10 +596,10 @@ public class InventarController : MonoBehaviour, IController
         var jsonSelectWeapon = JsonConvert.SerializeObject(weaponSelect);
         var jsonShop = JsonConvert.SerializeObject(itemsShop);
 
-        PlayerPrefs.SetString(SAVE_TOOL_ITEMS_KEY, jsonTool);
-        PlayerPrefs.SetString(SAVE_MATERIAL_ITEMS_KEY, jsonMaterial);
-        PlayerPrefs.SetString(SAVE_SELECT_ITEMS_KEY, jsonSelectItem);
-        PlayerPrefs.SetString(SAVE_SELECT_WEAPON_KEY, jsonSelectWeapon);
-        PlayerPrefs.SetString(SAVE_SHOP_ITEMS_KEY, jsonShop);
+        File.WriteAllText(pathToolItems, jsonTool);
+        File.WriteAllText(pathMaterialItems, jsonMaterial);
+        File.WriteAllText(pathSelectItems, jsonSelectItem);
+        File.WriteAllText(pathWeaponItem, jsonSelectWeapon);
+        File.WriteAllText(pathShopItems, jsonShop);
     }
 }

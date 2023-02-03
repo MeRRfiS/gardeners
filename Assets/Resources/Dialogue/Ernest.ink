@@ -1,5 +1,6 @@
 INCLUDE global.ink
 
+~ ernest_dialog_index = 1
 ~ character_index = 1
 
 {ernest_dialog_index: 
