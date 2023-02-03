@@ -130,10 +130,9 @@ public class PlayerController : MonoBehaviour, IController
         if (hasKVZHP)
         {
             playerStatistic.SetActive(true);
-            Debug.Log($"{healthBar.value}|{Heath * 0.2f}");
             if(healthBar.value < (Heath * 0.2f))
             {
-                SceneManager.LoadScene("Lobbi");
+                TextController.GetInstance().OpenEndGamePanel(0);
             }
         }
         else

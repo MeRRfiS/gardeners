@@ -17,6 +17,9 @@ public class TextController : MonoBehaviour, IController
 
     [Header("Message")]
     public GameObject warningPanel;
+    [SerializeField] private EndGame endGamePanel;
+    [SerializeField] private TextMeshProUGUI endMessage;
+    public GameObject openInventar;
 
     public LoadStatusEnum Status { get; private set; }
 
@@ -24,6 +27,7 @@ public class TextController : MonoBehaviour, IController
     {
         instance = this;
         warningPanel.SetActive(false);
+        endGamePanel.gameObject.SetActive(false);
 
         LangLoad();
 
@@ -63,12 +67,22 @@ public class TextController : MonoBehaviour, IController
     {
         LangLoad();
     }
+
+    public void OpenEndGamePanel(int index)
+    {
+        endGamePanel.ScenarioIndex = index;
+        endMessage.text = uiText.EndText[index];
+        Time.timeScale = 0;
+        endGamePanel.gameObject.SetActive(true);
+    }
 }
 
 public class UIText
 {
     public string OpenDoor;
     public string OpenDialog;
+
+    public string[] EndText = new string[3];
 }
 public class Items
 {

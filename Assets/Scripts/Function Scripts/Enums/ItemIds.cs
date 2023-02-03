@@ -16,6 +16,10 @@
     Web = 6,
     MonsterApplePits = 7,
     TreeSap = 8,
-    APieceOfForestRoot = 9
+    APieceOfForestRoot = 9,
+    #endregion
+
+    #region Bonus
+    Heal = 10
     #endregion
 }

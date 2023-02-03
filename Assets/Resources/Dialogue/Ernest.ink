@@ -1,6 +1,5 @@
 INCLUDE global.ink
 
-~ ernest_dialog_index = 1
 ~ character_index = 1
 
 {ernest_dialog_index: 
@@ -54,7 +53,7 @@ INCLUDE global.ink
         
 ===ErnestDialog_0_0_4===
 Кароче, перед тим як йди захищати світ від орди монтрів, візьми ось це.
-[отримано КВЖП]
+[отримано PVST]
 ~ get_KVZHP = 1
     * [Що це?]
         -> ErnestDialog_0_0_5

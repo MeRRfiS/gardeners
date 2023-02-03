@@ -7,23 +7,25 @@ public class MeleeWeapon : MonoBehaviour
 {
     [SerializeField] private float angleOffset = 90;
     [SerializeField] private Ease attackEase;
-    private float attackTime;
+    [SerializeField] private float attackTime;
     [SerializeField] private bool isAttacking = false;
     [SerializeField] public CameraController camController;
+
     void Start()
     {
         DOTween.Init();
-        attackTime = PlayerController.GetInstance().SpeedAttack;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isAttacking)
+        attackTime = PlayerController.GetInstance().SpeedAttack;
+
+        if (Input.GetMouseButton(0) && !isAttacking)
         {
             StartCoroutine(AttackCoroutine());
             isAttacking = true;
-            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, 0.2f).SetEase(attackEase).OnComplete(() =>
+            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, attackTime).SetEase(attackEase).OnComplete(() =>
             isAttacking = false
             );
         }
@@ -41,7 +43,38 @@ public class MeleeWeapon : MonoBehaviour
         IEnumerator AttackCoroutine()
         {
             yield return new WaitForSeconds(attackTime/2);
+            HitDamage();
             GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        }
+    }
+
+    private void HitDamage()
+    {
+        var hits = Physics2D.CircleCastAll(PlayerController.GetInstance().Player.transform.position,
+                                     2,
+                                     PlayerController.GetInstance().Player.transform.position,
+                                     0);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if(hit.collider.tag == "Enemy")
+            {
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                enemy.EnemiesModel.Lives -= PlayerController.GetInstance().Damage;
+                if(enemy.EnemiesModel.Lives <= 0)
+                {
+                    Destroy(enemy.gameObject);
+                }
+            }
+            else if(hit.collider.tag == "Spawner")
+            {
+                EnemySpawner spawner = hit.collider.GetComponent<EnemySpawner>();
+                spawner.Health -= PlayerController.GetInstance().Damage;
+                if (spawner.Health <= 0)
+                {
+                    Destroy(spawner.gameObject);
+                }
+            }
         }
     }
 }

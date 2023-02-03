@@ -104,6 +104,7 @@ public class DialogueController : MonoBehaviour, IController
                                            TextController.items.ItemName[(int)ItemIds.KVZHP],
                                            ItemsTypeEnum.Tool);
                 InventarController.GetInstance().AddNewItemTool(item);
+                TextController.GetInstance().openInventar.SetActive(true);
                 SetVariableState(GlobalVariablesConstants.GET_KVZHP, new IntValue(2));
             }
             if (((Ink.Runtime.BoolValue)GetVariableState(GlobalVariablesConstants.OPEN_SHOP)).value)

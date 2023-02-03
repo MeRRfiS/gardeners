@@ -1,4 +1,10 @@
 {
-  "OpenDoor": "\"E\" щоб відкрити двері",
-  "OpenDialog": "\"E\" щоб почати діалог"
+  "OpenDoor": "\"E\" to open the door",
+  "OpenDialog": "\"E\" to start a dialogue",
+
+  "EndText":[
+    "PVST saved you from death and brought you home. Recover and buy something from the shop to try again.",
+    "Oh, no! It seems you are dead! Unfortunately, the situation cannot be changed. Maybe if you put on PVST, you could have another chance. Unfortunately, you will have to start all over again.",
+    "Congratulations! You passed the version that was made for this GGJ. Yes, maybe a lot of things look raw, but you understand that no one canceled the blackout and force majeure in our country. However, our team thanks you for your attention and the time you spent in our game!"
+  ]
 }

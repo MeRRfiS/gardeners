@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent _agent;
 
     private bool isHitPlayer = false;
+
+    [SerializeField] private Slider health;
+    [SerializeField] private GameObject itemPrefab;
 
     public EnemiesModel EnemiesModel
     {
@@ -25,6 +29,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        health.maxValue = _enemiesModel.Lives;
+        health.value = _enemiesModel.Lives;
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
@@ -33,32 +39,80 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        _agent.SetDestination(PlayerController.GetInstance().Player.transform.position);
+        if (health.value == health.maxValue)
+        {
+            health.gameObject.SetActive(false);
+        }
+        else
+        {
+            health.gameObject.SetActive(true);
+        }
+
+        health.value = _enemiesModel.Lives;
+
+        if (Vector2.Distance(PlayerController.GetInstance().Player.transform.position, 
+                            gameObject.transform.position) <= 1.5f)
+        {
+            _agent.SetDestination(gameObject.transform.position);
+            StartCoroutine(HitDamage());
+        }
+        else
+        {
+            isHitPlayer = false;
+            StopCoroutine(HitDamage());
+            _agent.SetDestination(PlayerController.GetInstance().Player.transform.position);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnDestroy()
     {
-        if (collision.name != "Player") return;
+        List<ItemsModel> itemsModel = new List<ItemsModel>();
 
-        isHitPlayer = true;
-        StartCoroutine(HitDamage());
-    }
+        switch (_enemiesModel.Type)
+        {
+            case EnemyTypesEnum.Spider:
+                itemsModel.Add(new ItemsModel((int)ItemIds.Web,
+                                           TextController.items.ItemName[(int)ItemIds.Web],
+                                           ItemsTypeEnum.Material));
+                break;
+            case EnemyTypesEnum.Apple:
+                itemsModel.Add(new ItemsModel((int)ItemIds.MonsterApplePits,
+                                           TextController.items.ItemName[(int)ItemIds.MonsterApplePits],
+                                           ItemsTypeEnum.Material));
+                break;
+            case EnemyTypesEnum.Ent:
+                itemsModel.Add(new ItemsModel((int)ItemIds.TreeSap,
+                                           TextController.items.ItemName[(int)ItemIds.TreeSap],
+                                           ItemsTypeEnum.Material));
+                break;
+        }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.name != "Player") return;
+        if (Random.Range(1, 101) <= (100 / _enemiesModel.Duration))
+        {
+            itemsModel.Add(new ItemsModel((int)ItemIds.Heal,
+                                           "",
+                                           ItemsTypeEnum.Bonus));
+        }
 
-        isHitPlayer = false;
-        StopCoroutine(HitDamage());
+        foreach (var itemModel in itemsModel)
+        {
+            var itemObj = Instantiate(itemPrefab);
+            itemObj.transform.position = gameObject.transform.position;
+            itemObj.GetComponent<TropItem>().Item = itemModel;
+        }
     }
 
     private IEnumerator HitDamage()
     {
-        while (isHitPlayer)
+        if (!isHitPlayer)
         {
-            PlayerController.GetInstance().healthBar.value -= _enemiesModel.Damage;
+            isHitPlayer = true;
+            while (isHitPlayer)
+            {
+                PlayerController.GetInstance().healthBar.value -= _enemiesModel.Damage;
 
-            yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
 }
