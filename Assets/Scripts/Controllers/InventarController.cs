@@ -503,6 +503,10 @@ public class InventarController : MonoBehaviour, IController
         File.WriteAllText(pathSelectItems, "");
         File.WriteAllText(pathWeaponItem, "");
         File.WriteAllText(pathShopItems, "");
+
+        DialogueController.GetInstance().SetVariableState(GlobalVariablesConstants.IS_FIRST_MEET_WITH_ERNEST, new Ink.Runtime.BoolValue(true));
+        DialogueController.GetInstance().SetVariableState(GlobalVariablesConstants.ERNEST_DIALOG_INDEX, new Ink.Runtime.IntValue(0));
+        DialogueController.GetInstance().SetVariableState(GlobalVariablesConstants.ADELINA_DIALOG_INDEX, new Ink.Runtime.IntValue(0));
     }
 
     private void Update()

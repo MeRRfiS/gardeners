@@ -932,6 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorMap: {fileID: 1671622761}
   wallMap: {fileID: 86964687}
+  spawner: {fileID: 7494095267484446158, guid: 75204186bbc24c4448b42e1031b96145, type: 3}
   wall: {fileID: 11400000, guid: 29d45371cc71e5f42ac920dc5b723747, type: 2}
   floor: {fileID: 11400000, guid: ea4ec1b747e5524468d01d6afdcb5658, type: 2}
   shadowFloor: {fileID: 11400000, guid: 3a987890fa7a73d469913f1ce134a64e, type: 2}
@@ -940,8 +941,8 @@ MonoBehaviour:
   offsetX: -100
   offsetY: -100
   brushSize: 5
-  iterations: 1000
-  pathes: 10
+  iterations: 2500
+  pathes: 5
 --- !u!4 &1278437797
 Transform:
   m_ObjectHideFlags: 0
@@ -1002,7 +1003,7 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e2405643e26e3774b95d7e14f3ab20c5, type: 2}
 --- !u!1 &1325863374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,6 +3530,7 @@ GameObject:
   - component: {fileID: 1810474236}
   - component: {fileID: 1810474235}
   - component: {fileID: 1810474234}
+  - component: {fileID: 1810474238}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3644,7 +3646,7 @@ Transform:
   m_GameObject: {fileID: 1810474233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1325863375}
@@ -3652,6 +3654,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &1810474238
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810474233}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.65, y: 0.65, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1885631295
 GameObject:
   m_ObjectHideFlags: 0
@@ -3730,7 +3748,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angleOffset: -100
   attackEase: 12
-  attackTime: 0
   isAttacking: 0
   camController: {fileID: 0}
 --- !u!212 &2135195120

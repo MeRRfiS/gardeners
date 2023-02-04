@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,11 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private Slider healthSlider;
     [SerializeField] private GameObject itemPrefab;
+
+    public EnemyTypesEnum Type
+    {
+        set { type = value; }
+    }
 
     public int Health { get; set; }
 
@@ -70,26 +76,31 @@ public class EnemySpawner : MonoBehaviour
 
             var enemyObject = Instantiate(enemyPrefab.gameObject);
             enemyObject.transform.position = new Vector2(gameObject.transform.position.x,
-                                                         gameObject.transform.position.y - 2.5f);
+                                                         gameObject.transform.position.y - 1.5f);
             enemyObject.GetComponent<Enemy>().EnemiesModel = enemyModel;
 
             switch (enemyModel.Type)
             {
                 case EnemyTypesEnum.Spider:
                     enemyObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+                    enemyObject.transform.localScale = new Vector3(0.75f, 0.75f);
                     break;
                 case EnemyTypesEnum.Apple:
                     enemyObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0, 0);
+                    enemyObject.transform.localScale = new Vector3(0.5f, 0.5f);
                     break;
                 case EnemyTypesEnum.Ent:
                     enemyObject.GetComponent<SpriteRenderer>().color = new Color(0, 0.5f, 0);
+                    enemyObject.transform.localScale = new Vector3(1, 1);
                     break;
             }
         }
     }
 
-    private void OnDestroy()
+    public void CreateItem()
     {
+        ProceduralMapGenerator.spawners.Remove(gameObject);
+
         var itemModel = new ItemsModel((int)ItemIds.APieceOfForestRoot,
                                        TextController.items.ItemName[(int)ItemIds.APieceOfForestRoot],
                                        ItemsTypeEnum.Material);

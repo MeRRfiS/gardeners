@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour, IController
 
     public static PlayerController GetInstance()
     {
+        Time.timeScale = 1;
+
         return instance;
     }
 

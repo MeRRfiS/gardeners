@@ -14,17 +14,12 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Slider health;
     [SerializeField] private GameObject itemPrefab;
+    private Vector3 startPos;
 
     public EnemiesModel EnemiesModel
     {
         get { return _enemiesModel; }
         set { _enemiesModel = value; }
-    }
-
-    public NavMeshAgent Agent
-    {
-        get { return _agent; }
-        set { _agent = value; }
     }
 
     private void Start()
@@ -35,6 +30,7 @@ public class Enemy : MonoBehaviour
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _agent.speed = _enemiesModel.Speed;
+        startPos = gameObject.transform.position;
     }
 
     private void Update()
@@ -64,7 +60,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    public void CreateItem()
     {
         List<ItemsModel> itemsModel = new List<ItemsModel>();
 

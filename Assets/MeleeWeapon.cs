@@ -25,7 +25,7 @@ public class MeleeWeapon : MonoBehaviour
         {
             StartCoroutine(AttackCoroutine());
             isAttacking = true;
-i            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, attackTime).SetEase(attackEase).OnComplete(() =>
+            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, attackTime).SetEase(attackEase).OnComplete(() =>
             isAttacking = false
             );
         }
@@ -63,6 +63,7 @@ i            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, a
                 enemy.EnemiesModel.Lives -= PlayerController.GetInstance().Damage;
                 if(enemy.EnemiesModel.Lives <= 0)
                 {
+                    enemy.CreateItem();
                     Destroy(enemy.gameObject);
                 }
             }
@@ -72,6 +73,7 @@ i            DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, a
                 spawner.Health -= PlayerController.GetInstance().Damage;
                 if (spawner.Health <= 0)
                 {
+                    spawner.CreateItem();
                     Destroy(spawner.gameObject);
                 }
             }

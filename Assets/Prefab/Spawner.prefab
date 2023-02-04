@@ -59,7 +59,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &2967319171430495590
 MonoBehaviour:
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 7494095267484446157}
   - component: {fileID: 7494095267484446156}
   - component: {fileID: 7494095267484446159}
-  - component: {fileID: 4574539136087954030}
+  - component: {fileID: 8049107098781123122}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 7494095267484446158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.94, y: -3.18, z: 0}
-  m_LocalScale: {x: 1.8865, y: 1.8865, z: 1.8865}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9008258958238480435}
@@ -455,7 +455,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -483,19 +483,19 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5944203701363538464, guid: 9ffa3f9e7f954af45a1c140afe32a14b, type: 3}
   healthSlider: {fileID: 4111404072196805263}
   itemPrefab: {fileID: 5586732912451683115, guid: 5dac183be8ff4b6469596849530f22a8, type: 3}
---- !u!114 &4574539136087954030
-MonoBehaviour:
+--- !u!208 &8049107098781123122
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7494095267484446158}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.25, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

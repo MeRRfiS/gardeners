@@ -31,9 +31,7 @@ public class TropItem : MonoBehaviour
             default:
                 break;
         }
-        
+
         Destroy(gameObject);
     }
-
-    
 }

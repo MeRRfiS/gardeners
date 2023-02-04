@@ -35,6 +35,7 @@ public class StartGame : MonoBehaviour
             TextController.GetInstance().warningPanel.SetActive(true);
             return;
         }
+        InventarController.GetInstance().SaveInventoryToFile();
 
         StartCoroutine(LoadAsync("Level1"));
     }

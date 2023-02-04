@@ -70,6 +70,11 @@ public class TextController : MonoBehaviour, IController
 
     public void OpenEndGamePanel(int index)
     {
+        foreach (var item in GameObject.FindGameObjectsWithTag("Item"))
+        {
+            Destroy(item);
+        }
+
         endGamePanel.ScenarioIndex = index;
         endMessage.text = uiText.EndText[index];
         Time.timeScale = 0;

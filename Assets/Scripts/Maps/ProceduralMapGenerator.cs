@@ -9,6 +9,7 @@ public class ProceduralMapGenerator : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Tilemap floorMap;
     [SerializeField] private Tilemap wallMap;
+    [SerializeField] private GameObject spawner;
 
     [Header("Tiles")]
     [SerializeField] private RuleTile wall;
@@ -24,6 +25,8 @@ public class ProceduralMapGenerator : MonoBehaviour
     [SerializeField] private int iterations = 1000;
     [SerializeField] private int pathes = 10;
 
+    public static List<GameObject> spawners = new List<GameObject>();
+
     private void Start()
     {
         GenerateMap();
@@ -31,9 +34,9 @@ public class ProceduralMapGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (spawners.Count == 0)
         {
-            GenerateMap();
+            TextController.GetInstance().OpenEndGamePanel(2);
         }
     }
 
@@ -68,6 +71,59 @@ public class ProceduralMapGenerator : MonoBehaviour
                     floorMap.SetTile(walkerPos + new Vector3Int(0, a), floor);
                 }
             }
+        }
+
+        while (spawners.Count != 3)
+        {
+            var randX = Random.Range(0, width);
+            var randY = Random.Range(0, height);
+            //var floorTile = floorMap.GetTile(new Vector3Int(randX + offsetX, randY + offsetY));
+            var wallTiles = new List<TileBase>();
+            for (int i = -2; i <= 2; i++)
+            {
+                for (int j = -2; j <= 2; j++)
+                {
+                    wallTiles.Add(wallMap.GetTile(new Vector3Int(randX + offsetX + i, randY + offsetY + j)));
+                }
+            }
+
+            bool notEmptyPlace = false;
+            foreach (var wallTile in wallTiles)
+            {
+                if(wallTile != null)
+                {
+                    notEmptyPlace = true;
+                    break;
+                }
+            }
+            if (notEmptyPlace) continue;
+
+            bool isNotFar = false;
+            foreach (var spawn in spawners)
+            {
+                if(Vector2.Distance(spawn.transform.position, new Vector2Int(randX + offsetX, randY + offsetY)) <= 30)
+                {
+                    isNotFar = true;
+                    break;
+                }
+            }
+            if (isNotFar) continue;
+
+            var spawnerObj = Instantiate(spawner);
+            spawnerObj.transform.position = new Vector3Int(randX + offsetX, randY + offsetY);
+            switch (spawners.Count)
+            {
+                case (0):
+                    spawnerObj.GetComponent<EnemySpawner>().Type = EnemyTypesEnum.Spider;
+                    break;
+                case (1):
+                    spawnerObj.GetComponent<EnemySpawner>().Type = EnemyTypesEnum.Apple;
+                    break;
+                case (2):
+                    spawnerObj.GetComponent<EnemySpawner>().Type = EnemyTypesEnum.Ent;
+                    break;
+            }
+            spawners.Add(spawnerObj);
         }
 
         GetComponent<NavMeshSurface>().BuildNavMesh();

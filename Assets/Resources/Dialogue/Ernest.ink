@@ -94,13 +94,21 @@ INCLUDE global.ink
 
 ===ErnestDialog_1_0_0===
 ~ temp welcome_phrase = RANDOM(1,4)
+VAR start_dialog = true
+{start_dialog:
 {welcome_phrase:
 - 1: Якісь питання?
 - 2: Давно не бачилися.
 - 3: Диви, ще не помер.
 - 4: Слухаю.
 }
+- else: Ще питання?
+}
+~ start_dialog = false
 
+    * [Як справи?]
+        Було краще поки ти не прийшов.
+        ->ErnestDialog_1_0_0
     * [Та ні, нічого.]
         Добре.
         ->END

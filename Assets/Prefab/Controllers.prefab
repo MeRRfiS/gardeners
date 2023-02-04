@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feda030f49e7e64dac4f7d2831bcacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingWindow: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &719167160944507707
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +843,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 14
   m_TargetDisplay: 0
 --- !u!114 &9137416204329294168
 MonoBehaviour:
@@ -3820,6 +3822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a56e5755651be4fabd1a1097713f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingWindow: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!1 &5650060447543573582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4335,7 +4339,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &5650060447755145720
 MonoBehaviour:
@@ -6278,7 +6282,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 9
   m_TargetDisplay: 0
 --- !u!114 &5650060448720536397
 MonoBehaviour:
@@ -7134,7 +7138,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 13
   m_TargetDisplay: 0
 --- !u!114 &1788488882921527708
 MonoBehaviour:

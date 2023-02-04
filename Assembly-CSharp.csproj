@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Interface\IControllerManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\TropItem.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
@@ -95,11 +96,10 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\EnemiesModel.cs" />
     <Compile Include="Assets\Scripts\Controllers\SaveController.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\EndGame.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Objects Scripts\TropItem.cs" />
-    <Compile Include="Assets\Scripts\Objects Scripts\EndGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

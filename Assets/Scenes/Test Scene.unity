@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorMap: {fileID: 528309059}
   wallMap: {fileID: 510690736}
+  spawner: {fileID: 0}
   wall: {fileID: 11400000, guid: 29d45371cc71e5f42ac920dc5b723747, type: 2}
   floor: {fileID: 11400000, guid: ea4ec1b747e5524468d01d6afdcb5658, type: 2}
   shadowFloor: {fileID: 11400000, guid: 3a987890fa7a73d469913f1ce134a64e, type: 2}
@@ -3501,7 +3502,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714289806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.48, y: 1.21, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
