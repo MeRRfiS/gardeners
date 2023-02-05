@@ -172,4 +172,9 @@ public class ProceduralMapGenerator : MonoBehaviour
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
     }
+
+    private void OnDestroy()
+    {
+        spawners.Clear();
+    }
 }

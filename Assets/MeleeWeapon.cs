@@ -57,12 +57,13 @@ public class MeleeWeapon : MonoBehaviour
                                      2,
                                      PlayerController.GetInstance().Player.transform.position,
                                      0);
+        SoundController.GetInctanse().PlayHit();
 
         foreach (RaycastHit2D hit in hits)
         {
             if(hit.collider.tag == "Enemy")
             {
-                SoundController.GetInctanse().PlayHit();
+                SoundController.GetInctanse().PlayHitToEnemy();
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
                 enemy.EnemiesModel.Lives -= PlayerController.GetInstance().Damage;
                 if(enemy.EnemiesModel.Lives <= 0)
@@ -73,7 +74,7 @@ public class MeleeWeapon : MonoBehaviour
             }
             else if(hit.collider.tag == "Spawner")
             {
-                SoundController.GetInctanse().PlayHit();
+                SoundController.GetInctanse().PlayHitToEnemy();
                 EnemySpawner spawner = hit.collider.GetComponent<EnemySpawner>();
                 spawner.Health -= PlayerController.GetInstance().Damage;
                 if (spawner.Health <= 0)

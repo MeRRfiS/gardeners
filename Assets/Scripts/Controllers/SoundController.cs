@@ -8,6 +8,7 @@ public class SoundController : MonoBehaviour,IController
 
     private AudioSource audio;
     [SerializeField] private List<AudioClip> hits;
+    [SerializeField] private List<AudioClip> hitsToEnemy;
     [SerializeField] private AudioClip collect;
     [SerializeField] private AudioClip dialog;
 
@@ -29,6 +30,12 @@ public class SoundController : MonoBehaviour,IController
         audio.PlayOneShot(hits[rand]);
     }
 
+    public void PlayHitToEnemy()
+    {
+        var rand = Random.Range(0, hitsToEnemy.Count);
+        audio.PlayOneShot(hitsToEnemy[rand]);
+    }
+
     public void PlayCollect()
     {
         audio.PlayOneShot(collect);
@@ -47,7 +54,7 @@ public class SoundController : MonoBehaviour,IController
 
     public void UnMuteSound()
     {
-        audio.volume = 0.5f;
+        audio.volume = 0.2f;
         music.volume = 0.3f;
     }
 
