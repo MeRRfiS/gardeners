@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Objects Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
     <Compile Include="Assets\Scripts\Text\DialogueVariables.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawnerTypeTwo.cs" />
     <Compile Include="Assets\Scripts\Controllers\DialogueController.cs" />
     <Compile Include="Assets\Scripts\Buttons\MessageButton.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\CameraStatusEnum.cs" />
@@ -103,7 +104,6 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawnerTypeTwo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

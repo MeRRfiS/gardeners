@@ -335,7 +335,7 @@ public class InventarController : MonoBehaviour, IController
     public void UpdateSelectItem()
     {
         //Update selected items
-        var itemIconImages = myItemsPanel.transform.GetChild(1).GetComponentsInChildren<Image>();
+        var itemIconImages = myItemsPanel.transform.GetChild(0).GetChild(1).GetComponentsInChildren<Image>();
         //If not selected items
         if (itemSelect.Count == 0)
         {
@@ -358,7 +358,7 @@ public class InventarController : MonoBehaviour, IController
             itemIconImages[i].sprite = Resources.Load<Sprite>($"ItemFullIcon/{itemSelect[i].Index}");
         }
 
-        var weaponIconImage = myItemsPanel.transform.GetChild(3).GetComponentInChildren<Image>();
+        var weaponIconImage = myItemsPanel.transform.GetChild(0).GetChild(3).GetComponentInChildren<Image>();
         if (weaponSelect != null)
         {
             weaponIconImage.color = new Color(1, 1, 1);
