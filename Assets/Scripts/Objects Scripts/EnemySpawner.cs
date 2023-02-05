@@ -82,16 +82,20 @@ public class EnemySpawner : MonoBehaviour
             switch (enemyModel.Type)
             {
                 case EnemyTypesEnum.Spider:
-                    enemyObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
-                    enemyObject.transform.localScale = new Vector3(0.75f, 0.75f);
+                    enemyObject.GetComponent<SpriteRenderer>().sprite =
+                        Resources.Load<Sprite>($"Enemy/{(int)enemyModel.Type}");
+                    enemyObject.transform.localScale = new Vector3(1.25f, 1.25f);
                     break;
                 case EnemyTypesEnum.Apple:
-                    enemyObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0, 0);
-                    enemyObject.transform.localScale = new Vector3(0.5f, 0.5f);
+                    enemyObject.GetComponent<SpriteRenderer>().sprite =
+                        Resources.Load<Sprite>($"Enemy/{(int)enemyModel.Type}");
+                    enemyObject.GetComponent<Animator>().runtimeAnimatorController =
+                        Resources.Load<RuntimeAnimatorController>($"Enemy Animation/{(int)enemyModel.Type}");
                     break;
                 case EnemyTypesEnum.Ent:
-                    enemyObject.GetComponent<SpriteRenderer>().color = new Color(0, 0.5f, 0);
-                    enemyObject.transform.localScale = new Vector3(1, 1);
+                    enemyObject.GetComponent<SpriteRenderer>().sprite =
+                        Resources.Load<Sprite>($"Enemy/{(int)enemyModel.Type}");
+                    enemyObject.transform.localScale = new Vector3(2f, 2f);
                     break;
             }
         }

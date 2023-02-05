@@ -15,6 +15,8 @@ public class TropItem : MonoBehaviour
     {
         if (collision.name != "Player") return;
 
+        SoundController.GetInctanse().PlayCollect();
+
         switch (item.Type)
         {
             case ItemsTypeEnum.Material:

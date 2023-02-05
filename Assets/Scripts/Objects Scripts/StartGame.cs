@@ -17,6 +17,9 @@ public class StartGame : MonoBehaviour
             DialogueController
                 .GetInstance()
                 .SetVariableState(GlobalVariablesConstants.ERNEST_DIALOG_INDEX, new Ink.Runtime.IntValue(0));
+            DialogueController
+                .GetInstance()
+                .SetVariableState(GlobalVariablesConstants.CHARACTER_INDEX, new Ink.Runtime.IntValue(1));
             DialogueController.GetInstance().EnterDialogueMode(CharactersEnum.Ernest);
         }
         else
@@ -30,27 +33,37 @@ public class StartGame : MonoBehaviour
 
     public void ToLoadGame()
     {
-        if(InventarController.GetInstance().weaponSelect == null)
+        try
         {
-            TextController.GetInstance().warningPanel.SetActive(true);
-            return;
+            if (InventarController.GetInstance().weaponSelect == null)
+            {
+                TextController.GetInstance().warningPanel.SetActive(true);
+                return;
+            }
+            InventarController.GetInstance().SaveInventoryToFile();
+
+            StartCoroutine(TextController.GetInstance().LoadAsync("Level1"));
         }
-        InventarController.GetInstance().SaveInventoryToFile();
-
-        StartCoroutine(LoadAsync("Level1"));
-    }
-
-    IEnumerator LoadAsync(string sceneName)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        loadingWindow.SetActive(true);
-
-        while (!asyncLoad.isDone)
+        catch (System.Exception ex)
         {
-            slider.value = asyncLoad.progress;
-
-            yield return null;
+            Debug.LogError("ToLoadGame");
+            Debug.LogError(ex);
+            TextController.GetInstance().WriteErrorMessage(ex.Message);
+            throw ex;
         }
     }
+
+    //IEnumerator LoadAsync(string sceneName)
+    //{
+    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+    //    loadingWindow.SetActive(true);
+
+    //    while (!asyncLoad.isDone)
+    //    {
+    //        slider.value = asyncLoad.progress;
+
+    //        yield return null;
+    //    }
+    //}
 }

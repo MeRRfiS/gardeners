@@ -94,6 +94,7 @@ public class DialogueController : MonoBehaviour, IController
         {
             SetCharacterIcon();
             dialogueTextDisplay.text = currentStory.Continue();
+            SoundController.GetInctanse().PlayDialog();
             DisplayChoices();
         }
         else
@@ -123,6 +124,7 @@ public class DialogueController : MonoBehaviour, IController
 
         for (int i = 0; i < currentChoices.Count; i++)
         {
+            if (currentChoices[i].text == "") continue;
             var buttonObj = Instantiate(buttonPrefab, content);
             buttonObj.gameObject.SetActive(false);
             buttonObj.GetComponent<ChoiceIndex>().Index = i;
@@ -140,6 +142,7 @@ public class DialogueController : MonoBehaviour, IController
         index = 0;
         foreach (Choice choice in currentChoices)
         {
+            if (choice.text == "") continue;
             answerIsOpen = true;
             choisesScroll.SetActive(true);
             choices[index].gameObject.SetActive(true);

@@ -26,11 +26,18 @@ public class SaveController : MonoBehaviour, IController
 #else
         pathSave = Path.Combine(Application.dataPath, saveFileName);
 #endif
+
+        File.WriteAllText(pathSave, JsonUtility.ToJson(sv));
         try
         {
             if (File.Exists(pathSave))
             {
                 sv = JsonUtility.FromJson<Save>(File.ReadAllText(pathSave));
+                Debug.Log(sv);
+                if(sv == null)
+                {
+                    sv = new Save();
+                }
             }
         }
         catch (Exception e)
@@ -62,7 +69,12 @@ public class SaveController : MonoBehaviour, IController
 [Serializable]
 public class Save
 {
-    
+    public bool isFirstGame;
+
+    public Save()
+    {
+        isFirstGame = true;
+    }
 }
 
 [Serializable]

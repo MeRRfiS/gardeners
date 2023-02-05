@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\TropItem.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleSprite.cs" />
+    <Compile Include="Assets\Scripts\Function Scripts\Enums\SoundsEnum.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerLobbiManager.cs" />
     <Compile Include="Assets\Scripts\Text\DialogueVariables.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Scripts\Function Scripts\Enums\ItemsTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Maps\ProceduralMapGenerator.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\QuitGameOnKeypress.cs" />
     <Compile Include="Assets\MeleeWeapon.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\GlobalVariablesConstants.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\InventarController.cs" />
     <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SoundController.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Enums\LoadStatusEnum.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Constants\ControllerConstants.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Function Scripts\Models\ItemsModel.cs" />
     <Compile Include="Assets\Scripts\Buttons\ItemButton.cs" />
+    <Compile Include="Assets\Scripts\Objects Scripts\EnemySpawnerTypeTwo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

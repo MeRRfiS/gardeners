@@ -11,17 +11,19 @@ public class ControllerLobbiManager : MonoBehaviour, IControllerManager
     [SerializeField] private SaveController saveController;
     [SerializeField] private DialogueController dialogueController;
     [SerializeField] private InventarController inventarController;
+    [SerializeField] private SoundController soundController;
 
     private List<IController> controllers = new List<IController>();
 
     private void Awake()
     {
         controllers.Add(saveController);
+        controllers.Add(dialogueController);
         controllers.Add(textController);
         controllers.Add(inventarController);
         controllers.Add(playerController);
-        controllers.Add(dialogueController);
         controllers.Add(cameraController);
+        controllers.Add(soundController);
 
         StartCoroutine(LoadControllers());
     }
@@ -30,7 +32,11 @@ public class ControllerLobbiManager : MonoBehaviour, IControllerManager
     {
         foreach (IController controller in controllers)
         {
-            controller.StartUp();
+            while (controller.Status != LoadStatusEnum.IsLoaded)
+            {
+                controller.StartUp();
+                Debug.Log("Loading...");
+            }
         }
 
         yield return null;

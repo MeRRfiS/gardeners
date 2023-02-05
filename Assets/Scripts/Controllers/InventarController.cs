@@ -20,11 +20,11 @@ public class InventarController : MonoBehaviour, IController
     public List<ItemsModel> itemSelect { get; set; }
     public ItemsModel weaponSelect { get; set; }
 
-    private const string SAVE_TOOL_ITEMS_KEY = "Inventar Files/ITEMS_TOOL.json";
-    private const string SAVE_MATERIAL_ITEMS_KEY = "Inventar Files/ITEMS_MATERIAL.json";
-    private const string SAVE_SHOP_ITEMS_KEY = "Inventar Files/ITEMS_SHOP.json";
-    private const string SAVE_SELECT_ITEMS_KEY = "Inventar Files/SELECT_ITEMS.json";
-    private const string SAVE_SELECT_WEAPON_KEY = "Inventar Files/SELECT_WEAPON.json";
+    private const string SAVE_TOOL_ITEMS_KEY = "ITEMS_TOOL.json";
+    private const string SAVE_MATERIAL_ITEMS_KEY = "ITEMS_MATERIAL.json";
+    private const string SAVE_SHOP_ITEMS_KEY = "ITEMS_SHOP.json";
+    private const string SAVE_SELECT_ITEMS_KEY = "SELECT_ITEMS.json";
+    private const string SAVE_SELECT_WEAPON_KEY = "SELECT_WEAPON.json";
 
     [Header("Components")]
     public GameObject inventoryPanel;
@@ -217,6 +217,8 @@ public class InventarController : MonoBehaviour, IController
             choose.gameObject.SetActive(false);
         }
 
+        informationPanel.transform.GetChild(0).GetComponent<Image>().sprite =
+            Resources.Load<Sprite>($"ItemInfoIcon/{index}");
         //Set to "Choose" button index of choose item
         informationPanel.transform.GetChild(2).GetComponent<ItemButton>().ItemIndex = index;
 
@@ -227,6 +229,8 @@ public class InventarController : MonoBehaviour, IController
     {
         discriptionGoods.text = TextController.items.ItemDis[index];
 
+        infoShopPanel.transform.GetChild(0).GetComponent<Image>().sprite =
+            Resources.Load<Sprite>($"ItemInfoIcon/{index}");
         //Set to "Choose" button index of choose item
         infoShopPanel.transform.GetChild(2).GetComponent<ItemButton>().ItemIndex = index;
 
@@ -511,12 +515,13 @@ public class InventarController : MonoBehaviour, IController
 
     private void Update()
     {
-        TextController.GetInstance().openInventar.SetActive(false);
-
         if (Input.GetKeyDown(KeyCode.I) && 
             !DialogueController.GetInstance().dialogueIsPlaying &&
             !isCantOpen)
         {
+            if(SceneManager.GetActiveScene().name == "Lobbi")
+                TextController.GetInstance().openInventar.SetActive(false);
+
             if (SceneManager.GetActiveScene().name == "Lobbi")
             {
                 toolButton.SetActive(true);

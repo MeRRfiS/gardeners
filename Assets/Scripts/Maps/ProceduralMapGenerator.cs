@@ -10,6 +10,7 @@ public class ProceduralMapGenerator : MonoBehaviour
     [SerializeField] private Tilemap floorMap;
     [SerializeField] private Tilemap wallMap;
     [SerializeField] private GameObject spawner;
+    [SerializeField] private GameObject spawnerTypeTwo;
 
     [Header("Tiles")]
     [SerializeField] private RuleTile wall;
@@ -24,6 +25,8 @@ public class ProceduralMapGenerator : MonoBehaviour
     [SerializeField] private int brushSize = 5;
     [SerializeField] private int iterations = 1000;
     [SerializeField] private int pathes = 10;
+
+    private int countOfGenerated = 0;
 
     public static List<GameObject> spawners = new List<GameObject>();
 
@@ -42,6 +45,22 @@ public class ProceduralMapGenerator : MonoBehaviour
 
     public void GenerateMap()
     {
+        if (((Ink.Runtime.IntValue)DialogueController
+                    .GetInstance()
+                    .GetVariableState(GlobalVariablesConstants.GENERETED_MAP)).value != 2 ||
+            ((Ink.Runtime.IntValue)DialogueController
+                    .GetInstance()
+                    .GetVariableState(GlobalVariablesConstants.GENERETED_MAP)).value != 1)
+        {
+            countOfGenerated++;
+            if(countOfGenerated == 2)
+            {
+                DialogueController
+                .GetInstance()
+                .SetVariableState(GlobalVariablesConstants.GENERETED_MAP, new Ink.Runtime.IntValue(1));
+            }
+        }
+
         floorMap.ClearAllTiles();
         for (int forx = 0; forx < width; forx++)
         {
@@ -124,6 +143,31 @@ public class ProceduralMapGenerator : MonoBehaviour
                     break;
             }
             spawners.Add(spawnerObj);
+        }
+
+        int count = 0;
+        while (count != 3)
+        {
+            var randX = Random.Range(0, width);
+            var randY = Random.Range(0, height);
+            var wallTile = wallMap.GetTile(new Vector3Int(randX + offsetX, randY + offsetY));
+            if (wallTile != null) continue;
+
+            var spawnerObj = Instantiate(spawnerTypeTwo);
+            spawnerObj.transform.position = new Vector3Int(randX + offsetX, randY + offsetY);
+            switch (count)
+            {
+                case (0):
+                    spawnerObj.GetComponent<EnemySpawnerTypeTwo>().Type = EnemyTypesEnum.Spider;
+                    break;
+                case (1):
+                    spawnerObj.GetComponent<EnemySpawnerTypeTwo>().Type = EnemyTypesEnum.Apple;
+                    break;
+                case (2):
+                    spawnerObj.GetComponent<EnemySpawnerTypeTwo>().Type = EnemyTypesEnum.Ent;
+                    break;
+            }
+            count++;
         }
 
         GetComponent<NavMeshSurface>().BuildNavMesh();

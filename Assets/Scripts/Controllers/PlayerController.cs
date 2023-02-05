@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour, IController
 {
     private static PlayerController instance;
 
+    private AudioSource audio;
+
     private Vector2 moveDir;
 
     private const float DEFAULT_SPEED = 10f;
@@ -47,14 +49,14 @@ public class PlayerController : MonoBehaviour, IController
     {
         instance = this;
         playerStatistic.SetActive(false);
+        audio = GetComponent<AudioSource>();
+        Time.timeScale = 1;
 
         Status = LoadStatusEnum.IsLoaded;
     }
 
     public static PlayerController GetInstance()
     {
-        Time.timeScale = 1;
-
         return instance;
     }
 
@@ -142,10 +144,37 @@ public class PlayerController : MonoBehaviour, IController
             playerStatistic.SetActive(false);
         }
 
+        if(healthBar.value == 0)
+        {
+            TextController.GetInstance().OpenEndGamePanel(1);
+        }
+
         if (_isCanMove)
         {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             moveDir = moveInput.normalized * DEFAULT_SPEED;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            _player.GetComponent<SpriteRenderer>().flipX = true;
+        } 
+        else if (Input.GetKey(KeyCode.D))
+        {
+            _player.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S)) &&
+            _isCanMove && !DialogueController.GetInstance().dialogueIsPlaying)
+        {
+            _player.GetComponent<Animator>().SetBool("isWalk", true);
+            if(!audio.isPlaying)
+                audio.Play();
+        }
+        else
+        {
+            _player.GetComponent<Animator>().SetBool("isWalk", false);
+            audio.Stop();
         }
     }
 

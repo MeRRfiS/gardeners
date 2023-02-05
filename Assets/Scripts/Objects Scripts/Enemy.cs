@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     private EnemiesModel _enemiesModel = new EnemiesModel();
 
     private NavMeshAgent _agent;
+    private Animator anim;
 
     private bool isHitPlayer = false;
 
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
         health.maxValue = _enemiesModel.Lives;
         health.value = _enemiesModel.Lives;
         _agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _agent.speed = _enemiesModel.Speed;
@@ -46,15 +49,26 @@ public class Enemy : MonoBehaviour
 
         health.value = _enemiesModel.Lives;
 
+        if(gameObject.transform.position.x > PlayerController.GetInstance().Player.transform.position.x)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
         if (Vector2.Distance(PlayerController.GetInstance().Player.transform.position, 
                             gameObject.transform.position) <= 1.5f)
         {
+            anim.SetBool("isAttack", true);
             _agent.SetDestination(gameObject.transform.position);
             StartCoroutine(HitDamage());
         }
         else
         {
             isHitPlayer = false;
+            anim.SetBool("isAttack", false);
             StopCoroutine(HitDamage());
             _agent.SetDestination(PlayerController.GetInstance().Player.transform.position);
         }

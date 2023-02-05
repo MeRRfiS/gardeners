@@ -19,7 +19,8 @@ public class ItemButton : MonoBehaviour
 
     public void OpenInformation()
     {
-        InventarController.GetInstance().OpenInformationPanel(_index);
+        if(!InventarController.GetInstance().shopPanel.activeSelf)
+            InventarController.GetInstance().OpenInformationPanel(_index);
     }
 
     public void CloseInformation()

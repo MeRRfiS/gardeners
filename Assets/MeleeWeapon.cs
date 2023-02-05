@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class MeleeWeapon : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class MeleeWeapon : MonoBehaviour
 
         if (Input.GetMouseButton(0) && !isAttacking)
         {
+            if (SceneManager.GetActiveScene().name != "Lobbi")
+                TextController.GetInstance().openInventar.SetActive(false);
             StartCoroutine(AttackCoroutine());
             isAttacking = true;
             DOTween.To(() => angleOffset, x => angleOffset = x, -angleOffset, attackTime).SetEase(attackEase).OnComplete(() =>
@@ -59,6 +62,7 @@ public class MeleeWeapon : MonoBehaviour
         {
             if(hit.collider.tag == "Enemy")
             {
+                SoundController.GetInctanse().PlayHit();
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
                 enemy.EnemiesModel.Lives -= PlayerController.GetInstance().Damage;
                 if(enemy.EnemiesModel.Lives <= 0)
@@ -69,6 +73,7 @@ public class MeleeWeapon : MonoBehaviour
             }
             else if(hit.collider.tag == "Spawner")
             {
+                SoundController.GetInctanse().PlayHit();
                 EnemySpawner spawner = hit.collider.GetComponent<EnemySpawner>();
                 spawner.Health -= PlayerController.GetInstance().Damage;
                 if (spawner.Health <= 0)

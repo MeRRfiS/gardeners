@@ -8,64 +8,64 @@ INCLUDE global.ink
 }
 
 ===AdelinaDialog_0_0_0===
-Привітики, новенький!
-    * [Ну привіт.]
-        Яке холодне привітання.
-        -> AdelinaDialog_0_0_1
-    * [Привіт. Ти теж одна із Садівників?]
-        Ну не зовсім.
-        Скажемо, я тут трохи у ролі гостя.
-        -> AdelinaDialog_0_0_1
-    * [Що така хрупка та красива дівчина забула у цьому страшному лісі?]
-        Ще раз скажеш про хрупку дівчину, і цей гаєчний ключ прилетить тобі між очей.
-        -> AdelinaDialog_0_0_1
+Greetings, newbie!
+     * [Well hello.]
+         What a cold greeting.
+         -> AdelinaDialog_0_0_1
+     * [Hello. Are you one of the Gardeners too?]
+         Well, not really.
+         Let's say, I'm here a bit in the role of a guest.
+         -> AdelinaDialog_0_0_1
+     * [What did such a fragile and beautiful girl forget in this terrible forest?]
+         You say one more time about a fragile girl, and this wrench will fly between your eyes.
+         -> AdelinaDialog_0_0_1
 ===AdelinaDialog_0_0_1===
-Мене звати Аделіна.
-Я місцевий продавець. Продаю речі, які допомагають Садівникам вижити у пекельному бою з монстрами.
-    * [{ ernest_dialog_index == 2:
-Зачекай, хіба не Ернест має забеспечувати мене технікою та іншими речами для виживання?
-        }]
-        Ну... взагалі-то можливо так, але у мене теж є пару цікавих речей, які я можу продати.
-        ~character_index = 1
-        А якщо я їх можу продати, так чому б їх не продати вам, для того щоб зберегти життя!
-        ~character_index = 2
-        Я інколи віддаю їй свої винаходи, щоб вона відвалила від мене. А потім вона їх продає та наживається на таких простаках як ти.
-        ~character_index = 1
-        Ернесте, ти же знаєш що підслуховувати чужі розмови це не вічливо.
-        ~character_index = 2
-        Взагалі-то, мені тут не платять за етикет та нормальне відношення до інших. Тому мені якось начхати.
-        Ах... не звертай на нього уваги, він просто трохи не в настрої.
-        -> AdelinaDialog_0_0_2
-    * [Як звичайни продавець потрапила у зону де живуть монстри?]
-        У профісіональних продавців завжди є свої способи пробиратися до своїх потенційних клаєнтів!
-        Можливо якщо ти теж одного дня захочеш продавати товар, то ти теж знаєдеш ці шляхи.
-        -> AdelinaDialog_0_0_2
-    * [Кляті капіталісти! Навіть у часи небезпеки для людства ви прожовжуєте заробляти гроші!]
-        Розумієш, краще ми будемо заробляти гроші зараз, щоб потім це не робити в умовах пост-апакаліпсісу, і не продавати товар за кришки коли.
-        -> AdelinaDialog_0_0_2
+My name is Adelina.
+I am a local seller. Selling items that help Gardeners survive the hellish battle with monsters.
+     * [{ ernest_dialog_index == 2:
+Wait, isn't Ernest supposed to supply me with gear and other survival stuff?
+         }]
+         Well... maybe so, but I also have a couple of interesting things to sell.
+         ~character_index = 1
+         And if I can sell them, then why not sell them to you, in order to save life!
+         ~character_index = 2
+         I sometimes give her my inventions so that she can take them away from me. And then she sells them and makes money off simpletons like you.
+         ~character_index = 1
+         Ernest, you know that eavesdropping on other people's conversations is not polite.
+         ~character_index = 2
+         In general, I am not paid here for etiquette and a normal attitude towards others. That's why I somehow sneeze.
+         Ah... ignore him, he's just a little out of sorts.
+         -> AdelinaDialog_0_0_2
+     * [How did an ordinary saleswoman get into the area where monsters live?]
+         Professional salespeople always have their own ways of reaching their potential clients!
+         Maybe if one day you want to sell goods, you also know these ways.
+         -> AdelinaDialog_0_0_2
+     * [Damn capitalists! Even in times of danger to humanity, you live to make money!]
+         You see, it's better for us to make money now, so that we don't have to do it in post-apocalypse conditions later, and we don't sell goods for cola caps.
+         -> AdelinaDialog_0_0_2
 ===AdelinaDialog_0_0_2===
 ~ adelina_dialog_index = 1
-До речі, мій магазин не приймає гроші!
-Все таки я розумію, що у лісі їх не можна дістати.
-Тому якщо хочеш щось купити у моєму магазині, то приноси мені матеріали, які можна дістати з монстрів.
-Ти навіть не уявляєш наскільки вони є цінними на чорному ринку!
-Отже, якщо у тебе є зайві матеріали, то я завжди рада з тобою поговорити, а краще навіть щось продати!
+By the way, my store does not accept money!
+Still, I understand that you cannot get them in the forest.
+So if you want to buy something from my shop, bring me materials that can be obtained from monsters.
+You have no idea how valuable they are on the black market!
+So, if you have extra materials, I'm always happy to talk with you, and even better, sell something!
 -> END
 
 
 ===AdelinaDialog_1_0_0===
 ~ temp welcome_phrase = RANDOM(1,4)
 {welcome_phrase:
-- 1: Вітаннячка!
-- 2: Хочеш щось купити?
-- 3: Рада, що ти ще живий!
-- 4: Давно не бачилися!
+- 1: Greetings!
+- 2: Do you want to buy something?
+- 3: I'm glad you're still alive!
+- 4: Long time no see!
 }
 
-    * [Є щось на продажу?]
-        ~ open_shop = true
-        А як же!
-        ->END
-    * [До зустрічі!]
-        Пока пока!
-        ->END
+     * [Anything for sale?]
+         ~ open_shop = true
+         Of course!
+         ->END
+     * [Good bye!]
+         Bye bye!
+         ->END

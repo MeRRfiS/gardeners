@@ -13,8 +13,6 @@ public class EndGame : MonoBehaviour
 
     public void EndGameButton()
     {
-        print("1");
-
         switch (ScenarioIndex)
         {
             case (0):
@@ -25,6 +23,24 @@ public class EndGame : MonoBehaviour
                     Destroy(item);
                 }
                 Time.timeScale = 1;
+
+                if(((Ink.Runtime.IntValue)DialogueController
+                    .GetInstance()
+                    .GetVariableState(GlobalVariablesConstants.FIRST_GAME)).value != 2)
+                {
+                    DialogueController
+                    .GetInstance()
+                    .SetVariableState(GlobalVariablesConstants.FIRST_GAME, new Ink.Runtime.IntValue(1));
+                }
+                if (((Ink.Runtime.IntValue)DialogueController
+                    .GetInstance()
+                    .GetVariableState(GlobalVariablesConstants.WHAT_I_MUST_DO)).value != 2)
+                {
+                    DialogueController
+                    .GetInstance()
+                    .SetVariableState(GlobalVariablesConstants.WHAT_I_MUST_DO, new Ink.Runtime.IntValue(1));
+                }
+
                 StartCoroutine(LoadAsync("Lobbi"));
                 break;
             case (1):
