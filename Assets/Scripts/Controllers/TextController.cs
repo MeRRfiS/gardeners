@@ -110,11 +110,12 @@ public class TextController : MonoBehaviour, IController
                     .GetInstance()
                     .GetVariableState("open_error")).value == 0)
         {
-            if(errorWindow != null) errorWindow.SetActive(false);
-            SoundController.GetInctanse().UnMuteSound();
+            if (errorWindow.activeSelf) SoundController.GetInctanse().UnMuteSound();
+            if (errorWindow != null) errorWindow.SetActive(false);
+            
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !InventarController.GetInstance().inventarIsOpen)
         {
             SoundController.GetInctanse().MuteSound();
             pauseMenu.SetActive(true);
