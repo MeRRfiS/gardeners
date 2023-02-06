@@ -26,7 +26,8 @@ public class Dialog : MonoBehaviour
         textObj = player.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         textObj.text = TextController.uiText.OpenDialog;
 
-        if (Input.GetKey(KeyCode.E) && !DialogueController.GetInstance().dialogueIsPlaying)
+        if (Input.GetKey(KeyCode.E) && !DialogueController.GetInstance().dialogueIsPlaying
+            && !InventarController.GetInstance().inventarIsOpen && !TextController.GetInstance().pauseMenu.activeSelf)
         {
             switch (character)
             {

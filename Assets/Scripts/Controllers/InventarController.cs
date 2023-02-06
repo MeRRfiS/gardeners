@@ -65,6 +65,7 @@ public class InventarController : MonoBehaviour, IController
     private string pathWeaponItem;
 
     private bool isCantOpen = false;
+    public bool inventarIsOpen { get; private set; }
 
     public LoadStatusEnum Status { get; private set; }
 
@@ -517,7 +518,8 @@ public class InventarController : MonoBehaviour, IController
     {
         if (Input.GetKeyDown(KeyCode.I) && 
             !DialogueController.GetInstance().dialogueIsPlaying &&
-            !isCantOpen)
+            !isCantOpen &&
+            !TextController.GetInstance().pauseMenu.activeSelf)
         {
             if(SceneManager.GetActiveScene().name == "Lobbi")
                 TextController.GetInstance().openInventar.SetActive(false);
@@ -549,7 +551,12 @@ public class InventarController : MonoBehaviour, IController
            shopPanel.activeSelf ||
            informationPanel.activeSelf)
         {
+            inventarIsOpen = true;
             PlayerController.GetInstance().IsCanMove = false;
+        }
+        else
+        {
+            inventarIsOpen = false;
         }
     }
 

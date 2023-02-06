@@ -22,7 +22,7 @@ public class Door : MonoBehaviour
         textObj = player.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         textObj.text = TextController.uiText.OpenDoor;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !InventarController.GetInstance().inventarIsOpen)
         {
             if (player.transform.position.y > transform.position.y)
             {
